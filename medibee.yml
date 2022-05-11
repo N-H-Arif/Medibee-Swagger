@@ -1,0 +1,2333 @@
+openapi: 3.0.0
+info:
+  description: |
+    Project Api Documentation
+  version: "1.0.0"
+  title:  Project API
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/N-H-Arif/Medibee/1.0.0
+tags:
+  - name: Auth Service
+  - name: Quiz Service
+  - name: Admin Service
+  - name: Video Service
+    
+
+paths:
+  /createuser:
+    post:
+      tags:
+        - Auth Service
+      summary: Posting Data
+      operationId: adduser
+      responses:
+        '405':
+          description: Invalid input
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserCreate'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserCreate'
+      requestBody:
+        $ref: '#/components/requestBodies/CreateUser'
+        
+  /createOTP:
+    post:
+      tags:
+        - Auth Service
+      summary: Posting otp
+      operationId: createOTP
+      responses:
+        '200':
+          description: OTP Created
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/createotpresponse'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/createotpresponse'
+        '405':
+          description: Validation exception
+      requestBody:
+        $ref: '#/components/requestBodies/CreateOTP'
+        
+  /OTPverify:
+    post:
+      tags:
+        - Auth Service
+      summary: Verifying otp
+      operationId: cerifyOTP
+      responses:
+        '200':
+          description: OTP Verified
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/otpverifiedresponse'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/otpverifiedresponse'
+        '400':
+          description: Invalid ID supplied
+        '405':
+          description: Validation exception
+      requestBody:
+        $ref: '#/components/requestBodies/OTPverify'
+        
+  /Userlogin:
+    post:
+      tags:
+        - Auth Service
+      summary: Login of user
+      operationId: userLogin
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/userloginresponse'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/userloginresponse'
+        '400':
+          description: Invalid ID supplied
+        '404':
+          description: User not found
+        '405':
+          description: Validation exception
+      requestBody:
+        $ref: '#/components/requestBodies/UserLogin'
+  
+  /createquiz:
+    post:
+      tags:
+        - Quiz Service
+      summary: Posting Data
+      operationId: createQuiz
+      responses:
+        '405':
+          description: Invalid input
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/createquizresponse'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/createquizresponse'
+      requestBody:
+        $ref: '#/components/requestBodies/CreateQuiz'
+        
+        
+        
+  /Userauth:
+    get:
+      tags:
+        - Auth Service
+      summary: User Authentication
+      operationId: userauthenticate
+      security:
+        - Bearer: []
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserAuth'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserAuth'
+        '400':
+          description: Not Authenticated
+
+  /Userrolecheck:
+    get:
+      tags:
+        - Auth Service
+      summary: User Role Check
+      operationId: userrolecheck
+      security:
+        - Bearer: []
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Not Authenticated
+
+  /getuserprofile:
+    get:
+      tags:
+        - Auth Service
+      summary: Get User Profile
+      operationId: getuserprofile
+      security:
+        - Bearer: []
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserProfile'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserProfile'
+        '400':
+          description: Not Authenticated
+    
+  /QuizServiceTest:
+    get:
+      tags:
+        - Quiz Service
+      summary: Quiz Service Test
+      operationId: quizservicetest
+      security:
+        - Bearer: []
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/QuizServiceTest'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/QuizServiceTest'
+        '400':
+          description: Not Authenticated
+                  
+  /MCQquizwithAnswer:
+    get:
+      tags:
+        - Quiz Service
+      summary: MCQ Quiz with Answer
+      operationId: mcqquizwithanswer
+      security:
+        - Bearer: []
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Quizzeswithanswer'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Quizzeswithanswer'
+        '400':
+          description: Not Authenticated
+                  
+  /GetQuizMCQ:
+    get:
+      tags:
+        - Quiz Service
+      summary: Get Quiz MCQ
+      operationId: getquizmcq
+      security:
+        - Bearer: []
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetQuizMCQ'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetQuizMCQ'
+        '400':
+          description: Not Authenticated
+
+  /createmcq:
+    post:
+      tags:
+        - Quiz Service
+      summary: Create MCQ
+      operationId: createMCQ
+      responses:
+        '405':
+          description: Invalid input
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateMCQResponse'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateMCQResponse'
+      requestBody:
+        $ref: '#/components/requestBodies/CreateMCQ'
+
+  /createmcqcollection:
+    post:
+      tags:
+        - Quiz Service
+      summary: Create MCQ Collection
+      operationId: createMCQcollection
+      responses:
+        '405':
+          description: Invalid input
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateMCQcollectionResponse'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CreateMCQcollectionResponse'
+      requestBody:
+        $ref: '#/components/requestBodies/CreateMCQcollection'
+
+  /GetsinglemcqbyID:
+    get:
+      tags:
+        - Quiz Service
+      summary: Get single MCQ by ID
+      operationId: /GetsinglemcqbyID
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetsinglemcqbyID'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetsinglemcqbyID'
+        '400':
+          description: Not Authenticated
+
+  /GetallMCQ:
+    get:
+      tags:
+        - Quiz Service
+      summary: Get all MCQ
+      operationId: /GetallMCQ
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetallMCQ'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetallMCQ'
+        '400':
+          description: Not Authenticated
+
+  /addadmin:
+    post:
+      tags:
+        - Admin Service
+      summary: Add Admin
+      operationId: addadmin
+      responses:
+        '405':
+          description: Invalid input
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/addadminResponse'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/addadminResponse'
+      requestBody:
+        $ref: '#/components/requestBodies/addadmin'
+
+  /viewalluser:
+    get:
+      tags:
+        - Admin Service
+      summary: View all user
+      operationId: viewalluser
+      responses:
+        '405':
+          description: Invalid input
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/viewallusersResponse'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/viewallusersResponse'
+      requestBody:
+        $ref: '#/components/requestBodies/viewalluser'
+
+  /getitemsofhomepage:
+    get:
+      tags:
+        - Admin Service
+      summary: Get Items of home page
+      operationId: getitemsofhomepage
+      responses:
+        '405':
+          description: Invalid input
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/getitemsofhomepageResponse'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/getitemsofhomepageResponse'
+
+  /addsubscriptionpackage:
+    post:
+      tags:
+        - Admin Service
+      summary: Add Subscription Package
+      operationId: addsubscriptionpackage
+      security:
+        - Bearer: []
+      responses:
+        '405':
+          description: Invalid input
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/addsubscriptionpackageResponse'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/addsubscriptionpackageResponse'
+      requestBody:
+        $ref: '#/components/requestBodies/addsubscriptionpackage'
+
+  /viewallsubscriptionpackage:
+    get:
+      tags:
+        - Admin Service
+      summary: View all subscription package
+      operationId: viewallsubscriptionpackage
+      security:
+        - Bearer: []
+      responses:
+        '405':
+          description: Invalid input
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/viewallsubscriptionpackageResponse'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/viewallsubscriptionpackageResponse'
+
+  /sslcommerzpaymenttest:
+    get:
+      tags:
+        - Admin Service
+      summary: sslcommerz payment test
+      operationId: sslcommerzpaymenttest
+      responses:
+        '405':
+          description: Invalid input
+        '200':
+          description: successful operation
+
+  /sslcommerzpaymentsuccess:
+    get:
+      tags:
+        - Admin Service
+      summary: sslcommerz payment success
+      operationId: sslcommerzpaymentsuccess
+      responses:
+        '405':
+          description: Invalid input
+        '200':
+          description: successful operation
+
+  /buysubscriptionpackage:
+    post:
+      tags:
+        - Admin Service
+      summary: Buy Subscription Package
+      operationId: buysubscriptionpackage
+      security:
+        - Bearer: []
+      responses:
+        '405':
+          description: Invalid input
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/buysubscriptionpackageResponse'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/buysubscriptionpackageResponse'
+          
+  /GenerateToken:
+    get:
+      tags:
+        - Video Service
+      summary: Generate Token
+      operationId: /GenerateToken
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetallMCQ'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetallMCQ'
+        '400':
+          description: Not Authenticated
+
+  /AddRoom:
+    get:
+      tags:
+        - Video Service
+      summary: Add Room
+      operationId: /AddRoom
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetallMCQ'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetallMCQ'
+        '400':
+          description: Not Authenticated
+
+  /createmeeting:
+    post:
+      tags:
+        - Video Service
+      summary: Create Meeting
+      operationId: createmeeting
+      responses:
+        '405':
+          description: Invalid input
+        '200':
+          description: successful operation
+
+  
+    
+  
+components:
+  schemas:
+    
+    UserAuth2:
+      type: object
+      properties:
+        userId:
+          type: string
+          example: 621154236a0a6e212b9aebf6
+        username:
+          type: string
+          example: sabbir
+        role:
+          type: array
+          items: 
+            type: string
+            example: [user, super-admin, admin]
+        sessionId:
+          type: string
+          example: 62604fa66f5e20566df3b61a
+        iat:
+          type: integer
+          example: 1652225843
+        exp:
+          type: integer
+          example: 1683783443
+      xml:
+        name: User Auth
+
+    UserProfile2:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 621154236a0a6e212b9aebf6
+        name:
+          type: string
+          example: Md Sabbir Rahman
+        username:
+          type: string
+          example: sabbir
+        password:
+          type: string
+          example: $2b$10$/./tPs1rbAJJz3031iS7NOyqq5ae6dqbqFCMFYcjYRXnIpgD5cwlu
+        currentInstitute:
+          type: string
+          example: IUT
+        currentPosition:
+          type: string
+          example: Student
+        phone:
+          type: array
+          items: 
+            type: string
+            example: "01890609381"
+        email:
+          type: array
+          items: 
+            type: string
+            example:
+        role:
+          type: array
+          items: 
+            type: string
+            example: ["user", "super-admin" ,"admin"]
+        isPhoneVerified:
+          type: string
+          example: true
+        isVerified:
+          type: string
+          example: true
+        rating:
+          type: array
+          items: 
+            type: string
+            example:
+        createdAt:
+          type: string
+          example: 2022-02-19T20:33:39.870Z
+        updatedAt:
+          type: string
+          example: 2022-04-20T20:49:51.519Z
+        __v:
+          type: integer
+          example: 0
+      xml:
+        name: User Profile
+    
+    mcqss:
+      type: object
+      properties:
+        userId:
+          type: string
+          example: 621154236a0a6e212b9aebf6
+        username:
+          type: string
+          example: sabbir
+          
+    sampleq:
+      type: object
+      properties:
+        text:
+          type: string
+          example: 0
+        _id:
+          type: string
+          example: 6224f7acb7df773f41d9729e
+
+    author:
+      type: object
+      properties:
+        userId:
+          type: string
+          example: 621154236a0a6e212b9aebf6
+        username:
+          type: string
+          example: sabbir
+    
+        
+    qwithans:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 622b9f522e5554869440cb02
+        title:
+          type: string
+          example: Model test 1
+        types:
+          type: array
+          items: 
+            type: string
+            example: user
+        type:
+          type: string
+          example: model-test
+        status:
+          type: string
+          example: upcoming
+        image:
+          type: string
+          example: https://images.indianexpress.com/2020/06/online-classes.jpg
+        intervalType:
+          type: string
+          example: one-time
+        description:
+          type: string
+          example: This is description for model test
+        instruction:
+          type: string
+          example: Follow all the rules
+        slug:
+         type: string
+         example: model1
+        tags:
+          type: array
+          items:
+            type: string
+            example: model1, ssc
+        category:
+          type: string
+          example: ssc
+        totalQuestion:
+          type: integer
+          example: 10
+        totalMarks:
+          type: integer
+          example: 10
+        totalTimeInMinutes:
+          type: integer
+          example: 10
+        startTime:
+          type: string
+          example: 2020-05-15
+        endTime:
+          type: string
+          example: 2024-05-15
+        createdAt:
+          type: string
+          example: "2022-03-11T19:13:22.199Z"
+        updatedAt:
+          type: string
+          example: "2022-03-11T19:13:22.199Z"
+        __v:
+          type: integer
+          example: 0
+          
+    mcqs:
+      type: object
+      properties:
+          explanation:
+            type: string
+            example: This is a basic math 1 plus 1 is 2 or two
+          author:
+            $ref: '#/components/schemas/mcqss'
+          _id:
+            type: string
+            example: 6224f7acb7df773f41d9729d
+          mark:
+            type: integer
+            example: 0
+          subject:
+            type: string
+            example: Math
+          Chapter:
+            type: string
+            example: Basic
+          difficulty:
+            type: string
+            example: easy
+          question:
+            type: string
+            example: What is 1+1?
+          description:
+            type: string
+            example: This is a math question
+          options:
+            type: array
+            items:
+              type: string
+              example: ["'text: 0' '_id: 6224f7acb7df773f41d9729e'",
+                        "'text: 1' '_id: 6224f7acb7df773f41d9729f'","'text: 2' '_id: 6224f7acb7df773f41d972a0'","'text: two' '_id: 6224f7acb7df773f41d972a1'"]
+          correctedoptions:
+            type: array
+            items: 
+               type: integer
+               example: [2,3]
+          createdAt:
+            type: string
+            example: "2022-03-11T19:13:22.199Z"
+          updatedAt:
+            type: string
+            example: "2022-03-11T19:13:22.199Z"
+          __v:
+            type: integer
+            example: 0
+        
+
+    dataresponse:
+      type: object
+      properties:
+        mark:
+          type: integer
+          example: 5
+        subject:
+          type: string
+          example: Math
+        Chapter:
+          type: string
+          example: Basic
+        difficulty:
+          type: string
+          example: easy
+        question:
+          type: string
+          example: What is 1+1?
+        description:
+          type: string
+          example: This is a math question
+        options:
+          type: array
+          items:
+            type: string
+            example: ["'text: 0' '_id: 627a493f43dd21a02dc40162'",
+                      "'text: 1' '_id: 627a493f43dd21a02dc40163'","'text: 2' '_id: 627a493f43dd21a02dc40164'","'text: Two' '_id: 627a493f43dd21a02dc40165'"]
+        correctedoptions:
+          type: array
+          items: 
+             type: integer
+             example: [2,3]
+        explanation:
+          type: string
+          example: {'text':This is a basic math 1 plus 1 is 2 or two}
+        author:
+          $ref: '#/components/schemas/mcqss'
+        _id:
+          type: string
+          example: 627a493f43dd21a02dc40161
+        createdAt:
+          type: string
+          example: "2022-05-10T11:15:11.973Z"
+        updatedAt:
+          type: string
+          example: "2022-05-10T11:15:11.973Z"
+        __v:
+          type: integer
+          example: 0
+
+    createotpresponse1:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 621165aa35a0a066396c1fd6
+        userId:
+          type: string
+          example: 62115a7cd7fd542eadc2a88
+        __v:
+          type: integer
+          example: 0
+        createdAt:
+          type: string
+          example: "2022-02-19T21:47:16.650Z"
+        expiredAt:
+          type: string
+          example: "2022-05-11T09:16:46.226Z"
+        otp:
+          type: string
+          example: 770298
+        phone:
+          type: string
+          example: "01762694455"
+        purpose:
+          type: string
+          example: user account verification
+        updatedAt:
+          type: string
+          example: 2022-05-11T09:11:46.226Z
+        validateTimeMinutes:
+          type: integer
+          example: 5
+
+    userloginresponse1:
+      type: object
+      properties:
+        accessToken:
+          type: string
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjExNTQyMzZhMGE2ZTIxMmI5YWViZjYiLCJ1c2VybmFtZSI6InNhYmJpciIsInJvbGUiOlsidXNlciIsInN1cGVyLWFkbWluIiwiYWRtaW4iXSwic2Vzc2lvbklkIjoiNjI2MDRmYTY2ZjVlMjA1NjZkZjNiNjFhIiwiaWF0IjoxNjUyMjYwMDQ4LCJleHAiOjE2ODM4MTc2NDh9.mJff1RY6_ZUi2Ryrhw8k9R0RU8zedXvpRdx9fNZoQdcWxEOKUMNdFnfxLI2L4qK1tiUxSpavQYTtUEwVybs8b1zkqrhNR_eeGg9AUGneMcbMAHlEBL-n4yphZw8H148gp9QOyb-dBT6k7eibUHm0PgGDbMMd7MfKKb421RdctyY
+        refreshToken:
+          type: string
+          example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjExNTQyMzZhMGE2ZTIxMmI5YWViZjYiLCJ1c2VybmFtZSI6InNhYmJpciIsInJvbGUiOlsidXNlciIsInN1cGVyLWFkbWluIiwiYWRtaW4iXSwic2Vzc2lvbklkIjoiNjI2MDRmYTY2ZjVlMjA1NjZkZjNiNjFhIiwiaWF0IjoxNjUyMjYwMDQ4LCJleHAiOjE2ODM4MTc2NDh9.mJff1RY6_ZUi2Ryrhw8k9R0RU8zedXvpRdx9fNZoQdcWxEOKUMNdFnfxLI2L4qK1tiUxSpavQYTtUEwVybs8b1zkqrhNR_eeGg9AUGneMcbMAHlEBL-n4yphZw8H148gp9QOyb-dBT6k7eibUHm0PgGDbMMd7MfKKb421RdctyY
+
+    createquizresponse1:
+      type: object    
+      properties:
+        title:
+          type: string
+          example: Model test 1
+        type:
+          type: string
+          example: model-test
+        status:
+          type: string
+          example: upcoming
+        image:
+          type: string
+          example: https://images.indianexpress.com/2020/06/online-classes.jpg
+        intervalType:
+          type: string
+          example: one-time
+        description:
+          type: string
+          example: This is description for model test
+        instruction:
+          type: string
+          example: Follow all the rules
+        slug:
+          type: string
+          example: model01
+        tags:
+          type: array
+          items:
+            type: string
+            example: [model2, ssc]  
+        category:
+          type: string
+          example: ssc
+        totalQuestion:
+          type: integer
+          example: 10
+        totalMarks:
+          type: integer
+          example: 10
+        negativeMarksPercentage:
+          type: integer
+          example: 5
+        totalTimeInMinutes:
+          type: integer
+          example: 10
+        startTime:
+          type: string
+          example: 2020-05-15T00:00:00.000Z
+        endTime:
+          type: string
+          example: 2024-05-15T00:00:00.000Z
+        answerPublishTime:
+          type: string
+          example: 2021-05-15T00:00:00.000Z
+        _id:
+          type: string
+          example: 627b99311a48fb2b131b221d
+        createdAt:
+          type: string
+          example: 2022-05-11T11:08:33.971Z
+        updatedAt:
+          type: string
+          example: 2022-05-11T11:08:33.971Z
+        __v:
+          type: integer
+          example: 0
+          
+      
+        
+    getallmcqresponse1:
+      type: object
+      properties:
+        explanation:
+          type: string
+          example: {'text':This is a basic math 1 plus 1 is 2 or two}
+        author:
+          $ref: '#/components/schemas/mcqss'
+        mark:
+          type: integer
+          example: 1
+        subject:
+          type: string
+          example: Math
+        Chapter:
+          type: string
+          example: Basic
+        difficulty:
+          type: string
+          example: easy
+        question:
+          type: string
+          example: What is 1+1?
+        description:
+          type: string
+          example: This is a math question
+        options:
+          type: array
+          items:
+            type: string
+            example: ["'text: 0', '_id: 6224f7acb7df773f41d9729e'",
+                      "'text: 1', '_id: 6224f7acb7df773f41d9729f'","'text: 2', '_id: 6224f7acb7df773f41d972a0'","'text: Two', '_id: 6224f7acb7df773f41d972a1'"]
+        correctedoptions:
+          type: array
+          items: 
+             type: integer
+             example: [2,3]
+        createdAt:
+          type: string
+          example: "2022-03-06T18:04:28.119Z"
+        updatedAt:
+          type: string
+          example: "2022-03-06T18:04:28.119Z"
+        __v:
+          type: integer
+          example: 0
+
+
+    addadminresponse1:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 62115a7cd7fd542eadc2a88a
+        name:
+          type: string
+          example: Md Shamsuddoha Russel
+        username:
+          type: string
+          example: Russel
+        subject:
+          type: string
+          example: Math
+        password:
+          type: string
+          example: $2b$10$dlqjqglQk8U/muVpaioCV.l56K1JPBxgV3Oe5YZ464CGS47SMho.6
+        currentInstitute:
+          type: string
+          example: Kernel
+        currentPosition:
+          type: string
+          example: Worker
+        phone:
+          type: array
+          items:
+            type: string
+            example: "01762694455"
+        email:
+          type: array
+          items:
+            type: string
+            example: 
+        role:
+          type: array
+          items:
+            type: string
+            example: [user, admin]
+        isPhoneVerified:
+          type: boolean
+          example: true
+        isVerified:
+          type: boolean
+          example: false
+        rating:
+          type: array
+          items:
+            type: string
+            example: 
+        createdAt:
+          type: string
+          example: "2022-02-19T21:00:44.636Z"
+        updatedAt:
+          type: string
+          example: "2022-05-10T14:55:44.183Z"
+        __v:
+          type: integer
+          example: 0
+
+    addsubscriptionpackageresponse1:
+      type: object
+      properties:
+        title:
+          type: string
+          example: Admission model test
+        slug:
+          type: string
+          example: medi13
+        description:
+          type: string
+          example: This is for admission candidate
+        intervalType:
+          type: string
+          example: upcoming
+        fee:
+          type: integer
+          example: 500
+        startTime:
+          type: string
+          example: 2022-06-01T00:00:00.000Z
+        _id:
+          type: string
+          example: 626bd04091a3cfaf2147e0b2
+        createdAt:
+          type: string
+          example: "2022-04-29T11:47:12.062Z"
+        updatedAt:
+          type: string
+          example: "2022-04-29T11:47:12.062Z"
+        __v:
+          type: integer
+          example: 0
+
+    buysubscriptionpackageresponse1:
+      type: object
+      properties:
+        status:
+          type: string
+          example: SUCCESS
+        failedreason:
+          type: string
+          example: 
+        sessionkey:
+          type: string
+          example: 6F50A96F8086F021ABABE950D687536A
+        gw:
+          type: array
+          items:
+           $ref: '#/components/schemas/buysubscriptionpackagegw'
+        redirectGatewayURL:
+          type: string
+          example: https://sandbox.sslcommerz.com/gwprocess/v4/bankgw/indexhtml.php?mamount=10.00&ssl_id=220511537554g7eerMee4kaZ26&Q=REDIRECT&SESSIONKEY=6F50A96F8086F021ABABE950D687536A&tran_type=success&cardname=
+        directPaymentURLBank:
+          type: string
+          example: 
+        directPaymentURLCard:
+          type: string
+          example: 
+        directPaymentURL:
+          type: string
+          example: 
+        redirectGatewayURLFailed:
+          type: string
+          example: 
+        GatewayPageURL:
+          type: string
+          example: https://sandbox.sslcommerz.com/EasyCheckOut/testcde6f50a96f8086f021ababe950d687536a
+        storeBanner:
+          type: string
+          example: https://sandbox.sslcommerz.com/stores/logos/demoLogo.png
+        storeLogo:
+          type: string
+          example: https://sandbox.sslcommerz.com/stores/logos/demoLogo.png
+        store_name:
+          type: string
+          example: Demo
+        desc:
+          type: array
+          items:
+           $ref: '#/components/schemas/buysubscriptionpackage2'
+
+    buysubscriptionpackage2:
+      type: object
+      properties:
+        name:
+          type: string
+          example: AMEX
+        type:
+          type: string
+          example: amex
+        logo:
+          type: string
+          example: https://sandbox.sslcommerz.com/gwprocess/v4/image/gw/amex.png
+        gw:
+          type: string
+          example: amexcard
+        r_flag:
+          type: string
+          example: 1
+        redirectGatewayURL:
+          type: string
+          example: https://sandbox.sslcommerz.com/gwprocess/v4/bankgw/indexhtmlOTP.php?mamount=10.00&ssl_id=220511537554g7eerMee4kaZ26&Q=REDIRECT&SESSIONKEY=6F50A96F8086F021ABABE950D687536A&tran_type=success&cardname=visavard
+        
+    buysubscriptionpackagegw:
+      type: object
+      properties:
+        visa:
+          type: string
+          example: city_visa,ebl_visa,visacard
+        master:
+          type: string
+          example: city_master,ebl_master,mastercard
+        amex:
+          type: string
+          example: city_amex,amexcard
+        othercards:
+          type: string
+          example: qcash,fastcash
+        internetbanking:
+          type: string
+          example: city,bankasia,ibbl,mtbl
+        mobilebanking:
+          type: string
+          example: dbblmobilebanking,bkash,nagad,abbank,ibbl
+
+    viewalluserresponse1:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 621154236a0a6e212b9aebf6
+        name:
+          type: string
+          example: Md Sabbir Rahman
+        username:
+          type: string
+          example: sabbir
+        currentInstitute:
+          type: string
+          example: IUT
+        currentPosition:
+          type: string
+          example: Student
+        phone:
+          type: array
+          items:
+            type: string
+            example: "01890609381"
+        email:
+          type: array
+          items:
+            type: string
+            example: 
+        role:
+          type: array
+          items:
+            type: string
+            example: [user, super-admin, admin]
+        isPhoneVerified:
+          type: boolean
+          example: true
+        isVerified:
+          type: boolean
+          example: true
+        rating:
+          type: array
+          items:
+            type: string
+            example: 
+        createdAt:
+          type: string
+          example: "2022-02-19T20:33:39.870Z"
+        updatedAt:
+          type: string
+          example: "2022-04-20T20:49:51.519Z"
+        __v:
+          type: integer
+          example: 0
+
+    getitemofhomepageresponse1:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 343erget4343334
+        name:
+          type: string
+          example: Medibee olympiad
+        img:
+          type: string
+          example:
+        priority:
+          type: integer
+          example: 1
+        category:
+          type: string
+          example: banner
+        subcategory:
+          type: string
+          example: advertisement    
+        description:
+          type: string
+          example: Test your skills against student from across the country
+    
+    viewallsubscriptionpackage1:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 626f8a99e46ae286ade5643b
+        title:
+          type: string
+          example: Admission model test
+        slug:
+          type: string
+          example: medi1
+        description:
+          type: string
+          example: This is for admission candidate
+        intervalType:
+          type: string
+          example: one-time
+        status:
+          type: string
+          example: upcoming   
+        fee:
+          type: integer
+          example: 500
+        validityInDays:
+          type: integer
+          example: 365
+        startTime:
+          type: string
+          example: 2022-06-01T00:00:00.000Z
+        endTime:
+          type: string
+          example: 2023-06-01T00:00:00.000Z
+        enrolledStartTime:
+          type: string
+          example: 2022-07-01T00:00:00.000Z
+        enrolledEndTime:
+          type: string
+          example: 2022-09-01T00:00:00.000Z
+        maxEnrolledCount:
+          type: integer
+          example: 30
+        createdAt:
+          type: string
+          example: 2022-05-02T07:39:05.140Z
+        updatedAt:
+          type: string
+          example: 2022-05-02T07:39:05.140Z
+        __v:
+          type: integer
+          example: 9
+
+
+
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        username:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        phone:
+          type: string
+        userStatus:
+          type: integer
+          format: int32
+          description: User Status
+
+    data:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 621154236a0a6e212b9aebf6
+        name:
+          type: string
+          example: Md Sabbir Rahman
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        phone:
+          type: string
+        userStatus:
+          type: integer
+          format: int32
+          description: User Status
+        
+    OTP:
+      type: object
+      properties:
+        userID:
+          type: string
+          example: 62115a7cd7fd542eadc2a88a
+      xml:
+        name: OTP
+          
+    OTPverify:
+      type: object
+      properties:
+        otp:
+          type: string
+          example: 985823
+        userID:
+          type: string
+          example: 62115a7cd7fd542eadc2a88a
+      xml:
+        name: OTP verify
+          
+    Userlogin:
+      type: object
+      properties:
+        userID:
+          type: string
+          example: 62115a7cd7fd542eadc2a88a
+        password:
+          type: string
+          example: 123456
+      xml:
+        name: User Login
+       
+          
+    Users:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Md Shamsuddoha Russel
+        username:
+          type: string
+          example: Russel767
+        password:
+          type: string
+          example: 123456
+        passwordConfirmation:
+          type: string
+          example: 123456
+        currentInstitute:
+          type: string
+          example: Kernel
+        currentPosition:
+          type: string
+          example: Worker
+        phone:
+          type: string
+          example: 01762694455
+          
+    UserAuth:
+      type: object
+      properties:
+        isSuccess:
+          type: string
+          example: true
+        statusCode:
+          type: string
+          example: 200
+        message:
+          type: string
+          example: Authenticated
+        developerMessage:
+          type: string
+          example:
+        isReadOnly:
+          type: boolean
+          example: false
+        data:
+          $ref: '#/components/schemas/UserAuth2'
+
+    UserCreate:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Md Shamsuddoha Russel
+        username:
+          type: string
+          example: Russel767
+        currentInstitute:
+          type: string
+          example: Kernel
+        currentPosition:
+          type: string
+          example: Worker
+        phone:
+          type: array
+          items:
+            type: string
+            example: "01762694455"
+        email:
+          type: array
+          items:
+            type: string
+            example: 
+        role:
+          type: array
+          items:
+            type: string
+            example: user
+        isPhoneVerified:
+          type: boolean
+          example: false
+        isVerified:
+          type: boolean
+          example: false
+        _id:
+          type: string
+          example: 6230d85d64d32807c9145fcb
+        rating:
+          type: array
+          items:
+            type: string
+            example: 
+        createdAt:
+          type: string
+          example: 2022-03-15T18:18:05.546Z
+        updatedAt:
+          type: string
+          example: 2022-03-15T18:18:05.546Z
+        __v:
+          type: integer
+          example: 0
+          
+    createotpresponse:
+      type: object
+      properties:
+        isSuccess:
+          type: string
+          example: true
+        statusCode:
+          type: string
+          example: 200
+        message:
+          type: string
+          example: Otp created and valid for 5 minutes
+        developerMessage:
+          type: string
+          example:
+        isReadOnly:
+          type: boolean
+          example: false
+        data:
+          $ref: '#/components/schemas/createotpresponse1'
+    
+
+    otpverifiedresponse:
+      type: object
+      properties:
+        isSuccess:
+          type: string
+          example: true
+        statusCode:
+          type: string
+          example: 200
+        message:
+          type: string
+          example: OTP verification successfull. User ready to login
+        developerMessage:
+          type: string
+          example:
+        isReadOnly:
+          type: boolean
+          example: false
+        data:
+          type: array
+          example: {}
+
+    userloginresponse:
+      type: object
+      properties:
+        isSuccess:
+          type: string
+          example: true
+        statusCode:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: login successful
+        developerMessage:
+          type: string
+          example:
+        isReadOnly:
+          type: boolean
+          example: false
+        data:
+          $ref: '#/components/schemas/userloginresponse1'
+
+    createquizresponse:
+      type: object
+      properties:
+        isSuccess:
+          type: string
+          example: true
+        statusCode:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example:
+        developerMessage:
+          type: string
+          example:
+        isReadOnly:
+          type: boolean
+          example: false
+        data:
+          $ref: '#/components/schemas/createquizresponse1'
+
+    UserProfile:
+      type: object
+      properties: 
+        isSuccess:
+          type: string
+          example: true
+        statusCode:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: View profile successful
+        developerMessage:
+          type: string
+          example:
+        isReadOnly:
+          type: boolean
+          example: false
+        data:
+          $ref: '#/components/schemas/UserProfile2'
+
+          
+    QuizServiceTest:
+      type: object
+      properties:
+        isSuccess:
+          type: string
+          example: true
+        statusCode:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: Quiz routes ok
+        developerMessage:
+          type: string
+          example:
+        isReadOnly:
+          type: boolean
+          example: false
+        data:
+          type: array
+          example: {}
+        
+          
+          
+    Quizzes:
+      type: object
+      properties:
+        title:
+          type: string
+          example: Model test 1
+        type:
+          type: string
+          example: model-test
+        status:
+          type: string
+          example: upcoming
+        image:
+          type: string
+          example: https://images.indianexpress.com/2020/06/online-classes.jpg
+        intervalType:
+          type: string
+          example: one-time
+        description:
+          type: string
+          example: This is description for model test
+        instruction:
+          type: string
+          example: Follow all the rules
+        slug:
+          type: string
+          example: model01
+        tags:
+          type: array
+          items:
+            type: string
+            example: [model2, ssc]  
+        category:
+          type: string
+          example: ssc
+        totalQuestion:
+          type: integer
+          example: 10
+        totalMarks:
+          type: integer
+          example: 10
+        negativeMarksPercentage:
+          type: integer
+          example: 5
+        totalTimeInMinutes:
+          type: integer
+          example: 10
+        startTime:
+          type: string
+          example: 2020-05-15
+        endTime:
+          type: string
+          example: 2024-05-15
+        answerPublishTime:
+          type: string
+          example: "2021-05-15"
+          format: date-time
+      
+    MCQ:
+      type: object
+      properties:
+        mark:
+          type: integer
+          example: 5
+        subject:
+          type: string
+          example: Math
+        chapter:
+          type: string
+          example: Basic
+        difficulty:
+          type: string
+          example: easy
+        question:
+          type: string
+          example: What is 1+1
+        description:
+          type: string
+          example: This is a math question
+        options:
+          type: string
+          example: Follow all the rules
+        correctedOptions:
+          type: array
+          items:
+            type: integer
+            example: [2, 3]     
+        explanation:
+          type: string
+          example: {text: This is a basic math 1 plus 1 is 2 or two}
+        author:
+          $ref: '#/components/schemas/author' 
+
+    MCQcollection:
+      type: object
+      properties:
+        slug:
+          type: string
+          example: test4
+        description:
+          type: string
+          example: This is a description
+        quizId:
+          type: string
+          example: 626de4c75677750cb40cbd07
+        mcqsId:
+          type: array
+          items:
+            type: string
+            example: [6224f7acb7df773f41d9729d, 6224f81e3ec61036ba4d5bcf, 6224f890c8518d9d7920a5c2, 6224f9156ff4ba0196592108, 6224f95c97ddda6470af1f32]
+        createdBy:
+          type: string
+          example: 625a162d4af6c2e2cfbd1d2c
+
+    addadmin1:
+      type: object
+      properties:
+        userId:
+          type: string
+          example: 62115a7cd7fd542eadc2a88a   
+
+    addsubscriptionpackage1:
+      type: object
+      properties:
+        title:
+          type: string
+          example: Admission model test
+        slug:
+          type: string
+          example: medi13
+        description:
+          type: string
+          example: This is for admission candidate
+        intervalType:
+          type: string
+          example: one-time
+        status:
+          type: string
+          example: upcoming
+        fee:
+          type: integer
+          example: 500
+        startTime:
+          type: string
+          example: 2022-06-01
+
+    buysubscriptionpackage1:
+      type: object
+      properties:
+        url:
+          type: string
+          example: https://sandbox.sslcommerz.com/EasyCheckOut/testcde6f50a96f8086f021ababe950d687536a
+        slug:
+          type: string
+          example: medi13
+        description:
+          type: string
+          example: This is for admission candidate
+        intervalType:
+          type: string
+          example: one-time
+        status:
+          type: string
+          example: upcoming
+        fee:
+          type: integer
+          example: 500
+        startTime:
+          type: string
+          example: 2022-06-01
+
+
+    viewalluser1:
+      type: object
+      properties:
+        userId:
+          type: string
+          example: 621154236a0a6e212b9aebf6   
+            
+          
+    Quizzeswithanswer:
+      type: object
+      properties:
+        quiz:
+          $ref: '#/components/schemas/qwithans'
+        mcqs:
+          $ref: '#/components/schemas/mcqs'
+          
+    GetQuizMCQ:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 6224f7acb7df773f41d9729d
+        title:
+          type: string
+          example: Model test 1
+        type:
+          type: string
+          example: model-test
+        status:
+          type: string
+          example: upcoming
+        image:
+          type: string
+          example: https://images.indianexpress.com/2020/06/online-classes.jpg
+        intervalType:
+          type: string
+          example: one-time
+        description:
+          type: string
+          example: This is description for model test
+        instruction:
+          type: string
+          example: Follow all the rules
+        slug:
+          type: string
+          example: model1
+        tags:
+          type: array
+          items: 
+             type: string
+             example: ["model1","ssc"]
+        category:
+          type: string
+          example: ssc
+        totalQuestion:
+          type: integer
+          example: 10
+        totalMarks:
+          type: integer
+          example: 10
+        totalTimeInMinutes:
+          type: integer
+          example: 10
+        createdAt:
+          type: string
+          example: "2022-03-11T19:13:22.199Z"
+        updatedAt:
+          type: string
+          example: "2022-03-11T19:13:22.199Z"
+        __v:
+          type: integer
+          example: 0
+        mcqs:
+          $ref: '#/components/schemas/mcqs'
+
+    GetsinglemcqbyID:
+      type: object
+      properties:
+        isSuccess:
+          type: string
+          example: true
+        statusCode:
+          type: string
+          example: 200
+        message:
+          type: string
+          example:
+        developerMessage:
+          type: string
+          example:
+        isReadOnly:
+          type: boolean
+          example: false
+        data:
+          type: string
+          example: {}
+
+    CreateMCQResponse:
+      type: object
+      properties:
+        isSuccess:
+          type: string
+          example: true
+        statusCode:
+          type: string
+          example: 200
+        message:
+          type: string
+          example:
+        developerMessage:
+          type: string
+          example:
+        isReadOnly:
+          type: boolean
+          example: false
+        data:
+          $ref: '#/components/schemas/dataresponse'
+
+    CreateMCQcollectionResponse:
+      type: object
+      properties:
+        slug:
+          type: string
+          example: test4
+        description:
+          type: string
+          example: This is a description
+        quizId:
+          type: string
+          example: 627a7eb8ed2c698c34f8940a
+        mcqsId:
+          type: array
+          items:
+            type: string
+            example: [6224f7acb7df773f41d9729d, 6224f81e3ec61036ba4d5bcf, 6224f890c8518d9d7920a5c2, 6224f9156ff4ba0196592108, 6224f95c97ddda6470af1f32]
+        createdBy:
+          type: array
+          items:
+            type: string
+            example: [625a162d4af6c2e2cfbd1d2c]
+        _id:
+          type: string
+          example: 627b9d3e1a48fb2b131b2225
+        createdAt:
+          type: string
+          example: 2022-05-11T11:25:50.960Z
+        updatedAt:
+          type: string
+          example: 2022-05-11T11:25:50.960Z
+        __v:
+          type: integer
+          example: 0
+
+    GetallMCQ:
+       type: object
+       properties:
+        isSuccess:
+          type: string
+          example: true
+        statusCode:
+          type: string
+          example: 200
+        message:
+          type: string
+          example:
+        developerMessage:
+          type: string
+          example:
+        isReadOnly:
+          type: boolean
+          example: false
+        data:
+          type: array
+          items:
+            type: string
+            example: 
+            $ref: '#/components/schemas/getallmcqresponse1' 
+
+    addadminResponse:
+      type: object
+      properties:
+        isSuccess:
+          type: string
+          example: true
+        statusCode:
+          type: string
+          example: 200
+        message:
+          type: string
+          example: Admin addded succesfully
+        developerMessage:
+          type: string
+          example:
+        isReadOnly:
+          type: boolean
+          example: true
+        data:
+          type: array
+          items:
+            type: string
+            example: 
+            $ref: '#/components/schemas/addadminresponse1'
+
+    addsubscriptionpackageResponse:
+      type: object
+      properties:
+        isSuccess:
+          type: string
+          example: true
+        statusCode:
+          type: string
+          example: 200
+        message:
+          type: string
+          example: Subscription package succesfully added
+        developerMessage:
+          type: string
+          example:
+        isReadOnly:
+          type: boolean
+          example: false
+        data:
+          type: array
+          items:
+            type: string
+            example: 
+            $ref: '#/components/schemas/addsubscriptionpackageresponse1'
+
+    buysubscriptionpackageResponse:
+      type: object
+      properties:
+        url:
+          type: string
+          example: https://sandbox.sslcommerz.com/EasyCheckOut/testcde6f50a96f8086f021ababe950d687536a
+        data:
+          type: array
+          items:
+            type: string
+            example: 
+            $ref: '#/components/schemas/buysubscriptionpackageresponse1'
+        is_direct_pay_enable:
+          type: string
+          example: 0
+
+    viewallusersResponse:
+      type: object
+      properties:
+        isSuccess:
+          type: string
+          example: true
+        statusCode:
+          type: string
+          example: 200
+        message:
+          type: string
+          example: All user viewed succesfully
+        developerMessage:
+          type: string
+          example:
+        isReadOnly:
+          type: boolean
+          example: true
+        data:
+          type: array
+          items:
+            type: string
+            example: 
+            $ref: '#/components/schemas/viewalluserresponse1'
+
+    getitemsofhomepageResponse:
+      type: object
+      properties:
+        isSuccess:
+          type: string
+          example: true
+        statusCode:
+          type: string
+          example: 200
+        message:
+          type: string
+          example: Home page item viewed succesfully
+        developerMessage:
+          type: string
+          example:
+        isReadOnly:
+          type: boolean
+          example: false
+        data:
+          type: array
+          items:
+            type: string
+            example: 
+            $ref: '#/components/schemas/getitemofhomepageresponse1' 
+
+    viewallsubscriptionpackageResponse:
+      type: object
+      properties:
+        isSuccess:
+          type: string
+          example: true
+        statusCode:
+          type: string
+          example: 200
+        message:
+          type: string
+          example: View subscriptions package succesfull
+        developerMessage:
+          type: string
+          example:
+        isReadOnly:
+          type: boolean
+          example: false
+        data:
+          type: array
+          items:
+            type: string
+            example: 
+            $ref: '#/components/schemas/viewallsubscriptionpackage1' 
+        
+        
+  requestBodies:
+    CreateUser:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Users'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/Users'
+      description: Users to be added
+      required: true
+    
+    CreateQuiz:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Quizzes'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/Quizzes'
+      description: Quizzes to be created
+      required: true
+
+    CreateMCQ:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/MCQ'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/MCQ'
+      description: MCQ to be created
+      required: true
+
+    CreateMCQcollection:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/MCQcollection'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/MCQcollection'
+      description: MCQ Collection to be created
+      required: true
+
+    addadmin:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/addadmin1'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/addadmin1'
+      description: Admin to be added
+      required: true
+
+    addsubscriptionpackage:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/addsubscriptionpackage1'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/addsubscriptionpackage1'
+      description: Subscription Package to be added
+      required: true
+
+    buysubscriptionpackage:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/buysubscriptionpackage1'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/buysubscriptionpackage1'
+      description: Subscription Package to be bought
+      required: true
+
+    viewalluser:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/viewalluser1'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/viewalluser1'
+      description: view all users
+      required: true
+      
+    CreateOTP:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OTP'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/OTP'
+      description: Creating OTP
+      required: true
+      
+    OTPverify:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OTPverify'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/OTPverify'
+      description: Verifying OTP
+      required: true
+    
+    UserLogin:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Userlogin'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/Userlogin'
+      description: Verifying OTP
+      required: true
+      
+    UserArray:
+      content:
+        application/json:
+          schema:
+            type: array
+            items:
+              $ref: '#/components/schemas/User'
+      description: List of user object
+      required: true
+  securitySchemes:
+    
+    Bearer:
+      type: apiKey
+      name: Authorization
+      in: header
