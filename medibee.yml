@@ -431,8 +431,6 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/viewallusersResponse'
-      requestBody:
-        $ref: '#/components/requestBodies/viewalluser'
 
   /getitemsofhomepage:
     get:
@@ -615,6 +613,17 @@ paths:
           description: Invalid input
         '200':
           description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/createmeeting'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/createmeeting'
 
   
     
@@ -716,17 +725,31 @@ components:
         username:
           type: string
           example: sabbir
-          
-    sampleq:
+
+    createmeetingresponse2:
       type: object
       properties:
-        text:
+        region:
           type: string
-          example: 0
-        _id:
+          example: sg001
+        createdAt:
           type: string
-          example: 6224f7acb7df773f41d9729e
-
+          example: 2022-05-10T14:42:48.722Z
+        updatedAt:
+          type: string
+          example: 2022-05-10T14:42:48.722Z
+        roomId:
+          type: string
+          example: mqwk-hn5u-ko14
+        links:
+          type: array
+          items:
+            type: string
+            example: ["'get_room': 'https://api.videosdk.live/v2/rooms/mqwk-hn5u-ko14'", "'get_session': 'https://api.videosdk.live/v2/sessions/'"]
+        id:
+          type: string
+          example: 627a79e801b6d67b7f17bbfb
+          
     author:
       type: object
       properties:
@@ -1068,6 +1091,15 @@ components:
         __v:
           type: integer
           example: 0
+
+    createmeetingresponse1:
+      type: object
+      properties:
+        meeting:
+          $ref: '#/components/schemas/createmeetingresponse2'
+        token:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhcGlrZXkiOiJmMWQyMDg0MC04ZDI5LTRjZjAtOWU5NS00NjE0ZDNlMTViZmEiLCJwZXJtaXNzaW9ucyI6WyJhbGxvd19qb2luIl0sImlhdCI6MTY1MjE5Mzc2OCwiZXhwIjoxNjUyMTk0MzY4fQ.7K_uwCtTdGv-050Nkov_a9Mw6LviUtDpstj_7Ww9_Qg
 
 
     addadminresponse1:
@@ -1612,7 +1644,9 @@ components:
           example: false
         data:
           type: array
-          example: {}
+          items:
+            type: string
+            example: {}
 
     userloginresponse:
       type: object
@@ -1698,7 +1732,9 @@ components:
           example: false
         data:
           type: array
-          example: {}
+          items:
+            type: string
+            example: {}
         
           
           
@@ -2051,6 +2087,31 @@ components:
             type: string
             example: 
             $ref: '#/components/schemas/getallmcqresponse1' 
+      
+    createmeeting:
+       type: object
+       properties:
+        isSuccess:
+          type: string
+          example: true
+        statusCode:
+          type: string
+          example: 200
+        message:
+          type: string
+          example: Meeting generated succesfully
+        developerMessage:
+          type: string
+          example:
+        isReadOnly:
+          type: boolean
+          example: false
+        data:
+          type: array
+          items:
+            type: string
+            example: 
+            $ref: '#/components/schemas/createmeetingresponse1'
 
     addadminResponse:
       type: object
@@ -2270,17 +2331,6 @@ components:
           schema:
             $ref: '#/components/schemas/buysubscriptionpackage1'
       description: Subscription Package to be bought
-      required: true
-
-    viewalluser:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/viewalluser1'
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/viewalluser1'
-      description: view all users
       required: true
       
     CreateOTP:
