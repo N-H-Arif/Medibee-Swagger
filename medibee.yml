@@ -565,17 +565,6 @@ paths:
       responses:
         '200':
           description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/GetallMCQ'
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/GetallMCQ'
         '400':
           description: Not Authenticated
 
@@ -588,17 +577,6 @@ paths:
       responses:
         '200':
           description: successful operation
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/GetallMCQ'
-            application/xml:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/GetallMCQ'
         '400':
           description: Not Authenticated
 
@@ -630,8 +608,69 @@ paths:
   
 components:
   schemas:
-    
+    UserCreate2:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Md Shamsuddoha Russel
+        username:
+          type: string
+          example: Russel9401222
+        currentInstitute:
+          type: string
+          example: Kernel
+        currentPosition:
+          type: string
+          example: Worker
+        phone:
+          type: array
+          items:
+            type: string
+            example: "01762694455"
+        email:
+          type: array
+          items:
+            type: string
+            example: 
+        role:
+          type: array
+          items:
+            type: string
+            example: user
+        isPhoneVerified:
+          type: boolean
+          example: false
+        isVerified:
+          type: boolean
+          example: false
+        _id:
+          type: string
+          example: 627c674588b736b66485dec2
+        rating:
+          type: array
+          items:
+            type: string
+            example: 
+        createdAt:
+          type: string
+          example: 2022-03-15T18:18:05.546Z
+        updatedAt:
+          type: string
+          example: 2022-03-15T18:18:05.546Z
+        __v:
+          type: integer
+          example: 0
+      xml:
+        name: User Create
+
     UserAuth2:
+      type: object
+      properties:
+        user:
+          $ref: '#/components/schemas/UserAuth3'
+
+    UserAuth3:
       type: object
       properties:
         userId:
@@ -654,6 +693,62 @@ components:
         exp:
           type: integer
           example: 1683783443
+      xml:
+        name: User Auth
+
+    UserLogin2:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 621154236a0a6e212b9aebf6
+        name: 
+          type: string
+          example: Md Sabbir Rahman
+        username:
+          type: string
+          example: sabbir
+        currentInstitute:
+          type: string
+          example: IUT
+        currentPosition: 
+          type: string
+          example: Student
+        phone:
+          type: array
+          items: 
+            type: string
+            example: ["01890609381"]
+        email:
+          type: array
+          items: 
+            type: string
+            example:
+        role:
+          type: array
+          items: 
+            type: string
+            example: [user, super-admin, admin]
+        isPhoneVerified:
+          type: boolean
+          example: true
+        isVerified:
+          type: boolean
+          example: true
+        rating:
+          type: array
+          items: 
+            type: string
+            example:
+        createdAt:
+          type: string
+          example: 2022-02-19T20:33:39.870Z
+        updatedAt:
+          type: string
+          example: 2022-04-20T20:49:51.519Z
+        __v:
+          type: integer
+          example: 0
       xml:
         name: User Auth
 
@@ -694,10 +789,10 @@ components:
             type: string
             example: ["user", "super-admin" ,"admin"]
         isPhoneVerified:
-          type: string
+          type: boolean
           example: true
         isVerified:
-          type: string
+          type: boolean
           example: true
         rating:
           type: array
@@ -752,6 +847,9 @@ components:
           
     author:
       type: object
+      required:
+        - userId
+        - username
       properties:
         userId:
           type: string
@@ -759,14 +857,21 @@ components:
         username:
           type: string
           example: sabbir
+
+    qwithans:
+      type: object
+      properties:
+        quiz:
+          $ref: '#/components/schemas/qwithans2'
+        
     
         
-    qwithans:
+    qwithans2:
       type: object
       properties:
         _id:
           type: string
-          example: 622b9f522e5554869440cb02
+          example: 626de4c75677750cb40cbd07
         title:
           type: string
           example: Model test 1
@@ -774,7 +879,7 @@ components:
           type: array
           items: 
             type: string
-            example: user
+            example: [user]
         type:
           type: string
           example: model-test
@@ -800,7 +905,7 @@ components:
           type: array
           items:
             type: string
-            example: model1, ssc
+            example: [model1, ssc]
         category:
           type: string
           example: ssc
@@ -810,6 +915,9 @@ components:
         totalMarks:
           type: integer
           example: 10
+        negativeMarksPercentage:
+          type: integer
+          example: 5
         totalTimeInMinutes:
           type: integer
           example: 10
@@ -819,6 +927,9 @@ components:
         endTime:
           type: string
           example: 2024-05-15
+        answerPublishTime:
+          type: string
+          example: 2021-05-15T00:00:00.000Z
         createdAt:
           type: string
           example: "2022-03-11T19:13:22.199Z"
@@ -842,11 +953,11 @@ components:
             example: 6224f7acb7df773f41d9729d
           mark:
             type: integer
-            example: 0
+            example: 1
           subject:
             type: string
             example: Math
-          Chapter:
+          chapter:
             type: string
             example: Basic
           difficulty:
@@ -862,12 +973,11 @@ components:
             type: array
             items:
               type: string
-              example: ["'text: 0' '_id: 6224f7acb7df773f41d9729e'",
-                        "'text: 1' '_id: 6224f7acb7df773f41d9729f'","'text: 2' '_id: 6224f7acb7df773f41d972a0'","'text: two' '_id: 6224f7acb7df773f41d972a1'"]
+              example: 
           correctedoptions:
             type: array
             items: 
-               type: integer
+               type: number
                example: [2,3]
           createdAt:
             type: string
@@ -904,13 +1014,20 @@ components:
         options:
           type: array
           items:
-            type: string
-            example: ["'text: 0' '_id: 627a493f43dd21a02dc40162'",
-                      "'text: 1' '_id: 627a493f43dd21a02dc40163'","'text: 2' '_id: 627a493f43dd21a02dc40164'","'text: Two' '_id: 627a493f43dd21a02dc40165'"]
+            type: object
+            properties:
+              text:
+                 type: string
+                 example:
+              _id:
+                 type: string
+                 example:
+            example: 
+          
         correctedoptions:
           type: array
           items: 
-             type: integer
+             type: number
              example: [2,3]
         explanation:
           type: string
@@ -973,6 +1090,9 @@ components:
         refreshToken:
           type: string
           example: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MjExNTQyMzZhMGE2ZTIxMmI5YWViZjYiLCJ1c2VybmFtZSI6InNhYmJpciIsInJvbGUiOlsidXNlciIsInN1cGVyLWFkbWluIiwiYWRtaW4iXSwic2Vzc2lvbklkIjoiNjI2MDRmYTY2ZjVlMjA1NjZkZjNiNjFhIiwiaWF0IjoxNjUyMjYwMDQ4LCJleHAiOjE2ODM4MTc2NDh9.mJff1RY6_ZUi2Ryrhw8k9R0RU8zedXvpRdx9fNZoQdcWxEOKUMNdFnfxLI2L4qK1tiUxSpavQYTtUEwVybs8b1zkqrhNR_eeGg9AUGneMcbMAHlEBL-n4yphZw8H148gp9QOyb-dBT6k7eibUHm0PgGDbMMd7MfKKb421RdctyY
+        loginUser:
+           $ref: '#/components/schemas/UserLogin2'
+
 
     createquizresponse1:
       type: object    
@@ -1417,7 +1537,7 @@ components:
           example: 2022-05-02T07:39:05.140Z
         __v:
           type: integer
-          example: 9
+          example: 0
 
 
 
@@ -1470,31 +1590,39 @@ components:
         
     OTP:
       type: object
+      required:
+        - username
       properties:
-        userID:
+        username:
           type: string
-          example: 62115a7cd7fd542eadc2a88a
+          example: Russel940sss
       xml:
         name: OTP
           
     OTPverify:
       type: object
+      required:
+        - otp
+        - username
       properties:
+        username:
+          type: string
+          example: Russel940sss
         otp:
           type: string
-          example: 985823
-        userID:
-          type: string
-          example: 62115a7cd7fd542eadc2a88a
+          example: 364802
       xml:
         name: OTP verify
           
     Userlogin:
       type: object
+      required:
+        - username
+        - password
       properties:
-        userID:
+        username:
           type: string
-          example: 62115a7cd7fd542eadc2a88a
+          example: sabbir
         password:
           type: string
           example: 123456
@@ -1504,13 +1632,20 @@ components:
           
     Users:
       type: object
+      required:
+        - name
+        - username
+        - password
+        - passwordConfirmation
+        - currentInstitute
+        - currentPosition
       properties:
         name:
           type: string
           example: Md Shamsuddoha Russel
         username:
           type: string
-          example: Russel767
+          example: Russel9401222
         password:
           type: string
           example: 123456
@@ -1524,17 +1659,19 @@ components:
           type: string
           example: Worker
         phone:
-          type: string
-          example: 01762694455
+          type: array
+          items:
+            type: string
+            example: ["01762694455"]
           
     UserAuth:
       type: object
       properties:
         isSuccess:
-          type: string
+          type: boolean
           example: true
         statusCode:
-          type: string
+          type: integer
           example: 200
         message:
           type: string
@@ -1551,65 +1688,33 @@ components:
     UserCreate:
       type: object
       properties:
-        name:
-          type: string
-          example: Md Shamsuddoha Russel
-        username:
-          type: string
-          example: Russel767
-        currentInstitute:
-          type: string
-          example: Kernel
-        currentPosition:
-          type: string
-          example: Worker
-        phone:
-          type: array
-          items:
-            type: string
-            example: "01762694455"
-        email:
-          type: array
-          items:
-            type: string
-            example: 
-        role:
-          type: array
-          items:
-            type: string
-            example: user
-        isPhoneVerified:
+        isSuccess:
           type: boolean
-          example: false
-        isVerified:
-          type: boolean
-          example: false
-        _id:
-          type: string
-          example: 6230d85d64d32807c9145fcb
-        rating:
-          type: array
-          items:
-            type: string
-            example: 
-        createdAt:
-          type: string
-          example: 2022-03-15T18:18:05.546Z
-        updatedAt:
-          type: string
-          example: 2022-03-15T18:18:05.546Z
-        __v:
+          example: true
+        statusCode:
           type: integer
-          example: 0
+          example: 200
+        message:
+          type: string
+          example: New user creation successful
+        developerMessage:
+          type: string
+          example:
+        isReadOnly:
+          type: boolean
+          example: false
+        data:
+          $ref: '#/components/schemas/UserCreate2'
+        
           
     createotpresponse:
       type: object
       properties:
         isSuccess:
-          type: string
+          type: boolean
           example: true
         statusCode:
-          type: string
+          type: integer
           example: 200
         message:
           type: string
@@ -1628,10 +1733,10 @@ components:
       type: object
       properties:
         isSuccess:
-          type: string
+          type: boolean
           example: true
         statusCode:
-          type: string
+          type: integer
           example: 200
         message:
           type: string
@@ -1652,7 +1757,7 @@ components:
       type: object
       properties:
         isSuccess:
-          type: string
+          type: boolean
           example: true
         statusCode:
           type: integer
@@ -1673,7 +1778,7 @@ components:
       type: object
       properties:
         isSuccess:
-          type: string
+          type: boolean
           example: true
         statusCode:
           type: integer
@@ -1694,7 +1799,7 @@ components:
       type: object
       properties: 
         isSuccess:
-          type: string
+          type: boolean
           example: true
         statusCode:
           type: integer
@@ -1716,7 +1821,7 @@ components:
       type: object
       properties:
         isSuccess:
-          type: string
+          type: boolean
           example: true
         statusCode:
           type: integer
@@ -1740,22 +1845,41 @@ components:
           
     Quizzes:
       type: object
+      required:
+        - title
+        - type
+        - status
+        - intervalType
+        - instruction
+        - slug
+        - category
+        - totalQuestion
+        - totalMarks
+        - negativeMarksPercentage
+        - totalTimeInMinutes
       properties:
         title:
           type: string
           example: Model test 1
         type:
           type: string
-          example: model-test
+          enum:
+            - model-test
+            - course
+            - practice
         status:
           type: string
-          example: upcoming
+          enum:
+            - upcoming
+            - running
+            - stop
         image:
           type: string
           example: https://images.indianexpress.com/2020/06/online-classes.jpg
         intervalType:
           type: string
-          example: one-time
+          enum:
+            - one-time
         description:
           type: string
           example: This is description for model test
@@ -1772,35 +1896,49 @@ components:
             example: [model2, ssc]  
         category:
           type: string
-          example: ssc
+          enum:
+            - ssc
+            - hsc
+            - medical-admission
+            - mbbs-1
         totalQuestion:
-          type: integer
+          type: number
           example: 10
         totalMarks:
-          type: integer
+          type: number
           example: 10
         negativeMarksPercentage:
-          type: integer
+          type: number
           example: 5
         totalTimeInMinutes:
-          type: integer
+          type: number
           example: 10
         startTime:
           type: string
+          format: date
           example: 2020-05-15
         endTime:
           type: string
+          format: date
           example: 2024-05-15
         answerPublishTime:
           type: string
+          format: date
           example: "2021-05-15"
-          format: date-time
       
     MCQ:
       type: object
+      required:
+        - mark
+        - difficulty
+        - question
+        - options
+        - correctedOptions
+        - explanation
+        - author
       properties:
         mark:
-          type: integer
+          type: number
           example: 5
         subject:
           type: string
@@ -1810,29 +1948,67 @@ components:
           example: Basic
         difficulty:
           type: string
-          example: easy
+          enum:
+           - easy
+           - medium
+           - hard
+           - very-hard
         question:
           type: string
           example: What is 1+1
         description:
           type: string
           example: This is a math question
-        options:
+        image: 
           type: string
-          example: Follow all the rules
+          example: 
+        options:
+          type: array
+          items:
+            required:
+            - text
+            type: object
+            properties:
+              text:
+                type: string
+                example: Follow all the rules
+              image:
+                type: string
+                example:
+              serial:
+                type: number
+                example:
+             
         correctedOptions:
           type: array
           items:
-            type: integer
+            type: number
             example: [2, 3]     
         explanation:
-          type: string
-          example: {text: This is a basic math 1 plus 1 is 2 or two}
+          type: object
+          required:
+            - text
+          properties:
+             text:
+               type: string
+               example: "This is a basic math 1 plus 1 is 2 or two"
+             image:
+               type: string
+               example:
+             video:
+               type: string
+               example:
         author:
           $ref: '#/components/schemas/author' 
 
     MCQcollection:
       type: object
+      required:
+        - slug
+        - description
+        - quizId
+        - mcqsId
+        - createdBy
       properties:
         slug:
           type: string
@@ -1854,6 +2030,8 @@ components:
 
     addadmin1:
       type: object
+      required:
+        - userId
       properties:
         userId:
           type: string
@@ -1861,6 +2039,14 @@ components:
 
     addsubscriptionpackage1:
       type: object
+      required:
+        - title
+        - slug
+        - intervalType
+        - status
+        - fee
+        - validityInDays
+        - maxEnrolledCount
       properties:
         title:
           type: string
@@ -1873,16 +2059,36 @@ components:
           example: This is for admission candidate
         intervalType:
           type: string
-          example: one-time
+          enum:
+            - one-time
         status:
           type: string
-          example: upcoming
+          enum:
+            - upcoming
+            - running
+            - paused
+            - end
         fee:
-          type: integer
+          type: number
           example: 500
+        validityInDays:
+          type: number
+          example: 10
         startTime:
           type: string
           example: 2022-06-01
+        endTime:
+          type: string
+          example: 2022-06-01
+        enrolledStartTime:
+          type: string
+          example: 2022-06-01
+        enrolledEndTime:
+          type: string
+          example: 2022-06-01
+        maxEnrolledCount:
+          type: number
+          example: 5
 
     buysubscriptionpackage1:
       type: object
@@ -1921,7 +2127,22 @@ components:
     Quizzeswithanswer:
       type: object
       properties:
-        quiz:
+        isSuccess:
+          type: boolean
+          example: true
+        statusCode:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example:
+        developerMessage:
+          type: string
+          example:
+        isReadOnly:
+          type: boolean
+          example: false
+        data:
           $ref: '#/components/schemas/qwithans'
         mcqs:
           $ref: '#/components/schemas/mcqs'
@@ -1929,59 +2150,23 @@ components:
     GetQuizMCQ:
       type: object
       properties:
-        _id:
-          type: string
-          example: 6224f7acb7df773f41d9729d
-        title:
-          type: string
-          example: Model test 1
-        type:
-          type: string
-          example: model-test
-        status:
-          type: string
-          example: upcoming
-        image:
-          type: string
-          example: https://images.indianexpress.com/2020/06/online-classes.jpg
-        intervalType:
-          type: string
-          example: one-time
-        description:
-          type: string
-          example: This is description for model test
-        instruction:
-          type: string
-          example: Follow all the rules
-        slug:
-          type: string
-          example: model1
-        tags:
-          type: array
-          items: 
-             type: string
-             example: ["model1","ssc"]
-        category:
-          type: string
-          example: ssc
-        totalQuestion:
+        isSuccess:
+          type: boolean
+          example: true
+        statusCode:
           type: integer
-          example: 10
-        totalMarks:
-          type: integer
-          example: 10
-        totalTimeInMinutes:
-          type: integer
-          example: 10
-        createdAt:
+          example: 200
+        message:
           type: string
-          example: "2022-03-11T19:13:22.199Z"
-        updatedAt:
+          example:
+        developerMessage:
           type: string
-          example: "2022-03-11T19:13:22.199Z"
-        __v:
-          type: integer
-          example: 0
+          example:
+        isReadOnly:
+          type: boolean
+          example: false
+        data:
+          $ref: '#/components/schemas/qwithans'
         mcqs:
           $ref: '#/components/schemas/mcqs'
 
@@ -2004,17 +2189,16 @@ components:
           type: boolean
           example: false
         data:
-          type: string
-          example: {}
+          $ref: '#/components/schemas/mcqs'
 
     CreateMCQResponse:
       type: object
       properties:
         isSuccess:
-          type: string
+          type: boolean
           example: true
         statusCode:
-          type: string
+          type: integer
           example: 200
         message:
           type: string
@@ -2067,10 +2251,10 @@ components:
        type: object
        properties:
         isSuccess:
-          type: string
+          type: boolean
           example: true
         statusCode:
-          type: string
+          type: integer
           example: 200
         message:
           type: string
@@ -2092,10 +2276,10 @@ components:
        type: object
        properties:
         isSuccess:
-          type: string
+          type: boolean
           example: true
         statusCode:
-          type: string
+          type: integer
           example: 200
         message:
           type: string
@@ -2117,10 +2301,10 @@ components:
       type: object
       properties:
         isSuccess:
-          type: string
+          type: boolean
           example: true
         statusCode:
-          type: string
+          type: integer
           example: 200
         message:
           type: string
@@ -2142,10 +2326,10 @@ components:
       type: object
       properties:
         isSuccess:
-          type: string
+          type: boolean
           example: true
         statusCode:
-          type: string
+          type: integer
           example: 200
         message:
           type: string
@@ -2183,10 +2367,10 @@ components:
       type: object
       properties:
         isSuccess:
-          type: string
+          type: boolean
           example: true
         statusCode:
-          type: string
+          type: integer
           example: 200
         message:
           type: string
@@ -2208,10 +2392,10 @@ components:
       type: object
       properties:
         isSuccess:
-          type: string
+          type: boolean
           example: true
         statusCode:
-          type: string
+          type: integer
           example: 200
         message:
           type: string
@@ -2233,10 +2417,10 @@ components:
       type: object
       properties:
         isSuccess:
-          type: string
+          type: boolean
           example: true
         statusCode:
-          type: string
+          type: integer
           example: 200
         message:
           type: string
@@ -2363,7 +2547,7 @@ components:
         application/xml:
           schema:
             $ref: '#/components/schemas/Userlogin'
-      description: Verifying OTP
+      description: User Login
       required: true
       
     UserArray:
