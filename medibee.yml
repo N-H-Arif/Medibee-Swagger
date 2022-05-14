@@ -858,6 +858,22 @@ components:
           type: string
           example: sabbir
 
+    addsubscriptionpackage2:
+      type: object
+      required:
+        - quizIds
+      properties:
+        quizIds:
+          type: array
+          items:
+            type: string
+            example: [626de4c75677750cb40cbd07, 627a7eb8ed2c698c34f8940a] 
+        courseIds:
+          type: array
+          items:
+            type: string
+            example:
+
     qwithans:
       type: object
       properties:
@@ -1291,27 +1307,50 @@ components:
         slug:
           type: string
           example: medi13
+        packageIncludes:
+          $ref: '#/components/schemas/addsubscriptionpackage2'
+          
         description:
           type: string
           example: This is for admission candidate
         intervalType:
           type: string
-          example: upcoming
+          enum:
+            - one-time
+        status:
+          type: string
+          enum:
+            - upcoming
         fee:
           type: integer
           example: 500
+        validityInDays:
+          type: number
+          example: 365
         startTime:
           type: string
           example: 2022-06-01T00:00:00.000Z
+        endTime:
+          type: string
+          example: 2023-06-01T00:00:00.000Z
+        enrolledStartTime:
+          type: string
+          example: 2022-07-01T00:00:00.000Z
+        enrolledEndTime:
+          type: string
+          example: 2022-09-01T00:00:00.000Z
+        maxEnrolledCount:
+          type: number
+          example: 30
         _id:
           type: string
-          example: 626bd04091a3cfaf2147e0b2
+          example: 627eefe2184c08a3db9a7c63
         createdAt:
           type: string
-          example: "2022-04-29T11:47:12.062Z"
+          example: 2022-05-13T23:55:14.330Z
         updatedAt:
           type: string
-          example: "2022-04-29T11:47:12.062Z"
+          example: 2022-05-13T23:55:14.330Z
         __v:
           type: integer
           example: 0
@@ -2042,6 +2081,7 @@ components:
       required:
         - title
         - slug
+        - packageIncludes
         - intervalType
         - status
         - fee
@@ -2053,7 +2093,9 @@ components:
           example: Admission model test
         slug:
           type: string
-          example: medi13
+          example: medi4
+        packageIncludes:
+          $ref: '#/components/schemas/addsubscriptionpackage2' 
         description:
           type: string
           example: This is for admission candidate
