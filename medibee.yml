@@ -384,6 +384,54 @@ paths:
         '400':
           description: Not Authenticated
 
+  /GetQuiz:
+    get:
+      tags:
+        - Quiz Service
+      summary: Get Quiz
+      operationId: /GetQuiz
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetQuiz'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetQuiz'
+        '400':
+          description: Not Authenticated
+
+  /GetSubscribedQuiz:
+    get:
+      tags:
+        - Quiz Service
+      summary: Get Subscribed Quiz
+      operationId: /GetSubscribedQuiz
+      security:
+        - Bearer: []
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetQuiz'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetQuiz'
+        '400':
+          description: Not Authenticated
+
   /addadmin:
     post:
       tags:
@@ -1228,6 +1276,75 @@ components:
           type: integer
           example: 0
 
+    getquizresponse1:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 626de4c75677750cb40cbd07
+        title:
+          type: string
+          example: Model test 1
+        type:
+          type: string
+          example: model-test
+        status:
+          type: string
+          example: upcoming
+        image:
+          type: string
+          example: https://images.indianexpress.com/2020/06/online-classes.jpg
+        intervalType:
+          type: string
+          example: one-time
+        description:
+          type: string
+          example: This is description for model test
+        instruction:
+          type: string
+          example: Follow all the rules
+        slug:
+         type: string
+         example: model1
+        tags:
+          type: array
+          items:
+            type: string
+            example: [model1, ssc]
+        category:
+          type: string
+          example: ssc
+        totalQuestion:
+          type: integer
+          example: 10
+        totalMarks:
+          type: integer
+          example: 10
+        negativeMarksPercentage:
+          type: integer
+          example: 5
+        totalTimeInMinutes:
+          type: integer
+          example: 10
+        startTime:
+          type: string
+          example: 2020-05-15T00:00:00.000Z
+        endTime:
+          type: string
+          example: 2024-05-15T00:00:00.000Z
+        answerPublishTime:
+          type: string
+          example: 2021-05-15T00:00:00.000Z
+        createdAt:
+          type: string
+          example: 2022-05-01T01:39:19.277Z
+        updatedAt:
+          type: string
+          example: 2022-05-01T01:39:19.277Z
+        __v:
+          type: integer
+          example: 0
+
     createmeetingresponse1:
       type: object
       properties:
@@ -1309,7 +1426,6 @@ components:
           example: medi13
         packageIncludes:
           $ref: '#/components/schemas/addsubscriptionpackage2'
-          
         description:
           type: string
           example: This is for admission candidate
@@ -2312,7 +2428,32 @@ components:
           items:
             type: string
             example: 
-            $ref: '#/components/schemas/getallmcqresponse1' 
+            $ref: '#/components/schemas/getallmcqresponse1'
+
+    GetQuiz:
+       type: object
+       properties:
+        isSuccess:
+          type: boolean
+          example: true
+        statusCode:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example:
+        developerMessage:
+          type: string
+          example:
+        isReadOnly:
+          type: boolean
+          example: false
+        data:
+          type: array
+          items:
+            type: string
+            example: 
+            $ref: '#/components/schemas/getquizresponse1' 
       
     createmeeting:
        type: object
