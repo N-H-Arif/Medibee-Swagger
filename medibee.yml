@@ -432,6 +432,56 @@ paths:
         '400':
           description: Not Authenticated
 
+  /SubmitQuizResponse:
+    post:
+      tags:
+        - Quiz Service
+      summary: Submit Quiz Response
+      operationId: submitQuizResponse
+      security:
+        - Bearer: []
+      responses:
+        '405':
+          description: Invalid input
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SubmitQuizResponse'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SubmitQuizResponse'
+      requestBody:
+        $ref: '#/components/requestBodies/SubmitQuizResponse'
+
+  /RealtimeQuizRank:
+    get:
+      tags:
+        - Quiz Service
+      summary: Get Realtime Quiz Rank
+      operationId: /GetRealtimeQuizRank
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetRealtimeQuizRank'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GetRealtimeQuizRank'
+        '400':
+          description: Not Authenticated
+
   /addadmin:
     post:
       tags:
@@ -1227,8 +1277,53 @@ components:
           type: integer
           example: 0
           
-      
-        
+
+    submitquizresponse1:
+      type: object
+      properties:
+        quizId:
+          type: string
+          example: 626de4c75677750cb40cbd07
+        userId:
+          type: string
+          example: 621154236a0a6e212b9aebf6
+        timeTakenInSeconds:
+          type: number
+          example: 1600
+        totalQuestion:
+          type: number
+          example: 5
+        totalSkipped:
+          type: number
+          example: 2
+        totalCorrect:
+          type: number
+          example: 2
+        totalWrong:
+          type: number
+          example: 1
+        positiveMark:
+          type: number
+          example: 2
+        negativeMark:
+          type: number
+          example: 0.6000000000000001
+        totalMark:
+          type: number
+          example: 1.4
+        _id:
+          type: string
+          example: 628a513fdeaff45920438bab
+        createdAt:
+          type: string
+          example: 2022-05-22T15:05:35.542Z
+        updatedAt:
+          type: string
+          example: 2022-05-22T15:05:35.542Z
+        __v:
+          type: number
+          example: 0
+
     getallmcqresponse1:
       type: object
       properties:
@@ -1344,6 +1439,23 @@ components:
         __v:
           type: integer
           example: 0
+     
+    getrealtimequizrankresponse1:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 626de4c75677750cb40cbd07
+        userId:
+          type: string
+          example: 621154236a0a6e212b9aebf6
+        timeTakenInSeconds:
+          type: number
+          example: 1600
+        totalMark:
+          type: number
+          example: 4.5
+        
 
     createmeetingresponse1:
       type: object
@@ -2183,6 +2295,51 @@ components:
           type: string
           example: 625a162d4af6c2e2cfbd1d2c
 
+    SubmitquizResponse:
+      type: object
+      required:
+        - timeTakenInSeconds
+        - totalAnswered
+        - totalSkipped
+        - quizId
+        - mcqsId
+        - createdBy
+        - mcqs
+      properties:
+        quizId:
+          type: string
+          example: 626de4c75677750cb40cbd07
+        userId:
+          type: string
+          example: 621154236a0a6e212b9aebf6
+        timeTakenInSeconds:
+          type: number
+          example: 1600
+        totalAnswered:
+          type: number
+          example: 3
+        totalSkipped:
+          type: number
+          example: 2
+        mcqs:
+          type: array
+          items:
+            type: object
+            required:
+              - mcqsId
+              - answer
+            properties:
+              mcqsId:
+                type: string
+                example: 6224f7acb7df773f41d9729d
+              answer:
+                type: array
+                items:
+                  type: number
+                  example: [2,3]
+            
+           
+
     addadmin1:
       type: object
       required:
@@ -2404,6 +2561,31 @@ components:
         __v:
           type: integer
           example: 0
+    
+    SubmitQuizResponse:
+      type: object
+      properties:
+        isSuccess:
+          type: boolean
+          example: true
+        statusCode:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example:
+        developerMessage:
+          type: string
+          example:
+        isReadOnly:
+          type: boolean
+          example: false
+        data:
+          type: array
+          items:
+            type: string
+            example: 
+            $ref: '#/components/schemas/submitquizresponse1'
 
     GetallMCQ:
        type: object
@@ -2454,6 +2636,31 @@ components:
             type: string
             example: 
             $ref: '#/components/schemas/getquizresponse1' 
+
+    GetRealtimeQuizRank:
+       type: object
+       properties:
+        isSuccess:
+          type: boolean
+          example: true
+        statusCode:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example:
+        developerMessage:
+          type: string
+          example:
+        isReadOnly:
+          type: boolean
+          example: false
+        data:
+          type: array
+          items:
+            type: string
+            example: 
+            $ref: '#/components/schemas/getrealtimequizrankresponse1' 
       
     createmeeting:
        type: object
@@ -2665,6 +2872,17 @@ components:
           schema:
             $ref: '#/components/schemas/MCQcollection'
       description: MCQ Collection to be created
+      required: true
+
+    SubmitQuizResponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/SubmitquizResponse'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/SubmitquizResponse'
+      description: Quiz Response to be Submitted
       required: true
 
     addadmin:
