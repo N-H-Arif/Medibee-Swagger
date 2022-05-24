@@ -2635,8 +2635,11 @@ components:
           properties:
            quizzes:
             type: array
-            example: 
-            $ref: '#/components/schemas/getquizresponse1' 
+            items:
+             type: array
+             items: 
+              example: 
+              $ref: '#/components/schemas/getquizresponse1' 
 
     GetRealtimeQuizRank:
        type: object
