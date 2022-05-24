@@ -2631,9 +2631,10 @@ components:
           type: boolean
           example: false
         data:
-          type: array
-          items:
-            type: string
+          type: object
+          properties:
+           quizzes:
+            type: array
             example: 
             $ref: '#/components/schemas/getquizresponse1' 
 
