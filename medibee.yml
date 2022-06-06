@@ -13,6 +13,7 @@ tags:
   - name: Quiz Service
   - name: Admin Service
   - name: Video Service
+  - name: Course Service
     
 
 paths:
@@ -702,8 +703,55 @@ paths:
                   $ref: '#/components/schemas/createmeeting'
 
   
+  /courseservicetest:
+    get:
+      tags:
+        - Course Service
+      summary: Course Service Test
+      operationId: testscourseroute
+      responses:
+        '405':
+          description: Invalid input
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/testcourseroute'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/testcourseroute'
     
-  
+  /CreateCourse:
+    post:
+      tags:
+        - Course Service
+      summary: Create Course
+      operationId: createcourse
+      responses:
+        '405':
+          description: Invalid input
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/createcourseResponse'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/createcourseResponse'
+      requestBody:
+        $ref: '#/components/requestBodies/createcourse'
+
+
 components:
   schemas:
     UserCreate2:
@@ -1583,6 +1631,95 @@ components:
           type: integer
           example: 0
 
+    createcourseresponse1:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Course 1
+        description:
+          type: string
+          example: This is course decription
+        fee:
+          type: number
+          example: 1100
+        category:
+          type: string
+          enum:
+            - mbbs
+            - admission
+            - post-grad
+        resources:
+          type: array
+          items:
+            type: object
+            required:
+              - id
+              - order
+              - type
+            properties:
+              id:
+                type: string
+                example: 62115a7cd7fd542eadc2a88a
+              order:
+                type: number
+                example: 1
+              type:
+                type: array
+                items:
+                  enum:
+                    - video
+                    - quiz
+                    - notes
+              _id:
+                type: string
+                example: 629db35ce7fd7be165efcab3
+        mentors:
+          type: array
+          items:
+            type: object
+            required:
+              - userId
+              - username
+              - mentorRating
+            properties:
+              userId:
+                type: string
+                example: 62115a7cd7fd542eadc2a88a
+              username:
+                type: string
+                example: sabbir
+              mentorRating:
+                type: number
+                example: 4.5
+              _id:
+                type: string
+                example: 629db35ce7fd7be165efcab6
+        videoLessonHour:
+          type: number
+          example: 22
+        totalQuiz:
+          type: number
+          example: 10
+        enrollCount:
+          type: number
+          example: 0
+        isVerified:
+          type: boolean
+          example: false
+        _id:
+          type: string
+          example: 629db35ce7fd7be165efcab2
+        createdAt:
+          type: string
+          example: 2022-06-06T07:57:16.019Z
+        updatedAt:
+          type: string
+          example: 2022-06-06T07:57:16.019Z
+        __v:
+          type: integer
+          example: 0
+
     buysubscriptionpackageresponse1:
       type: object
       properties:
@@ -2404,6 +2541,99 @@ components:
         maxEnrolledCount:
           type: number
           example: 5
+    
+    createcourse1:
+      type: object
+      required:
+        - name
+        - description
+        - fee
+        - rating
+        - category
+        - mentors
+        - videoLessonHour
+        - totalQuiz
+        - enrollCount
+      properties:
+        name:
+          type: string
+          example: Course 1
+        description:
+          type: string
+          example: This is course decription
+        fee:
+          type: number
+          example: 1100
+        rating:
+          type: number
+          example: This is for admission candidate
+        category:
+          type: string
+          enum:
+            - mbbs
+            - admission
+            - post-grad
+        resources:
+          type: array
+          items:
+            type: object
+            required:
+              - id
+              - order
+              - type
+            properties:
+              id:
+                type: string
+                example: 62115a7cd7fd542eadc2a88a
+              order:
+                type: number
+                example: 1
+              type:
+                type: array
+                items:
+                  enum:
+                    - video
+                    - quiz
+                    - notes
+        enrolledStartDate:
+          type: string
+          example: 2022-09-10
+        enrolledEndDate:
+          type: string
+          example: 2022-12-10
+        maxEnrolledCount:
+          type: number
+          example: 100
+        mentors:
+          type: array
+          items:
+            type: object
+            required:
+              - userId
+              - username
+              - mentorRating
+            properties:
+              userId:
+                type: string
+                example: 62115a7cd7fd542eadc2a88a
+              username:
+                type: string
+                example: sabbir
+              mentorRating:
+                type: number
+                example: 4.5
+        videoLessonHour:
+          type: number
+          example: 22
+        totalQuiz:
+          type: number
+          example: 10
+        enrollCount:
+          type: number
+          example: 0
+        isVerified:
+          type: boolean
+          example: true
 
     buysubscriptionpackage1:
       type: object
@@ -2740,7 +2970,32 @@ components:
             type: string
             example: 
             $ref: '#/components/schemas/addsubscriptionpackageresponse1'
-
+    
+    createcourseResponse:
+      type: object
+      properties:
+        isSuccess:
+          type: boolean
+          example: true
+        statusCode:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: Course created succesfully wait for admin approval
+        developerMessage:
+          type: string
+          example:
+        isReadOnly:
+          type: boolean
+          example: false
+        data:
+          type: array
+          items:
+            type: string
+            example: 
+            $ref: '#/components/schemas/createcourseresponse1'
+  
     buysubscriptionpackageResponse:
       type: object
       properties:
@@ -2832,7 +3087,32 @@ components:
             example: 
             $ref: '#/components/schemas/viewallsubscriptionpackage1' 
         
-        
+    testcourseroute:
+      type: object
+      properties:
+        isSuccess:
+          type: boolean
+          example: true
+        statusCode:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: Course routes ok
+        developerMessage:
+          type: string
+          example:
+        isReadOnly:
+          type: boolean
+          example: false
+        data:
+          type: array
+          items:
+            type: string
+            example: 
+           
+
+
   requestBodies:
     CreateUser:
       content:
@@ -2909,6 +3189,17 @@ components:
           schema:
             $ref: '#/components/schemas/addsubscriptionpackage1'
       description: Subscription Package to be added
+      required: true
+
+    createcourse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/createcourse1'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/createcourse1'
+      description: Course to be created
       required: true
 
     buysubscriptionpackage:
