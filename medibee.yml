@@ -214,6 +214,31 @@ paths:
         '400':
           description: Not Authenticated
     
+  /userprofileimageupload:
+    post:
+      tags:
+        - Auth Service
+      summary: Uploading User profile image
+      operationId: uploadimage
+      responses:
+        '405':
+          description: Invalid input
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/imageupload'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/imageupload'
+      requestBody:
+        $ref: '#/components/requestBodies/ImageUpload'
+
   /QuizServiceTest:
     get:
       tags:
@@ -956,6 +981,68 @@ components:
           example: 0
       xml:
         name: User Profile
+
+    imageupload2:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 621154236a0a6e212b9aebf6
+        name:
+          type: string
+          example: Md Sabbir Rahman
+        username:
+          type: string
+          example: sabbir
+        password:
+          type: string
+          example: $2b$10$/./tPs1rbAJJz3031iS7NOyqq5ae6dqbqFCMFYcjYRXnIpgD5cwlu
+        image:
+          type: string
+          example: 97a9f766857f53f398d3ff290b1ca236
+        currentInstitute:
+          type: string
+          example: Kernel
+        currentPosition:
+          type: string
+          example: Worker
+        phone:
+          type: array
+          items: 
+            type: string
+            example: "01890609381"
+        email:
+          type: array
+          items: 
+            type: string
+            example:
+        role:
+          type: array
+          items: 
+            type: string
+            example: ["user", "super-admin" ,"admin"]
+        isPhoneVerified:
+          type: boolean
+          example: true
+        isVerified:
+          type: boolean
+          example: false
+        rating:
+          type: array
+          items: 
+            type: string
+            example:
+        createdAt:
+          type: string
+          example: 2022-06-15T17:35:05.029Z
+        updatedAt:
+          type: string
+          example: 2022-06-16T01:28:42.065Z
+        __v:
+          type: integer
+          example: 0
+      xml:
+        name: Image Upload
     
     mcqss:
       type: object
@@ -2220,6 +2307,27 @@ components:
         data:
           $ref: '#/components/schemas/UserProfile2'
 
+    imageupload:
+      type: object
+      properties: 
+        isSuccess:
+          type: boolean
+          example: true
+        statusCode:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: Image uploaded
+        developerMessage:
+          type: string
+          example:
+        isReadOnly:
+          type: boolean
+          example: false
+        data:
+          $ref: '#/components/schemas/imageupload2'
+
           
     QuizServiceTest:
       type: object
@@ -3134,6 +3242,18 @@ components:
           schema:
             $ref: '#/components/schemas/Quizzes'
       description: Quizzes to be created
+      required: true
+
+    ImageUpload:
+      content:
+        image/png:
+          schema:
+            type: object
+            properties:
+              image: 
+                type: string
+                format: binary
+      description: Image to be uplaoded
       required: true
 
     CreateMCQ:
