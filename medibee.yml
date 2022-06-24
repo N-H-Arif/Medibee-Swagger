@@ -834,6 +834,53 @@ paths:
                 items:
                   $ref: '#/components/schemas/viewallcourseresponse'
 
+  /CreateCoursedetails:
+    post:
+      tags:
+        - Course Service
+      summary: Create Course Details
+      operationId: createcoursedetails
+      responses:
+        '405':
+          description: Invalid input
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/createcoursedetailsResponse'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/createcoursedetailsResponse'
+      requestBody:
+        $ref: '#/components/requestBodies/createcoursedetails'
+  
+  /viewcoursedetails:
+    get:
+      tags:
+        - Course Service
+      summary: View Course Details
+      operationId: viewcoursedetails
+      responses:
+        '405':
+          description: Invalid input
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/viewcoursedetailsresponse'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/viewcoursedetailsresponse'
 
 components:
   schemas:
@@ -1864,6 +1911,222 @@ components:
         __v:
           type: integer
           example: 0
+        
+    createcoursedetailsresponse1:
+      type: object
+      properties:
+        courseId:
+          type: string
+          example: 62af7362b4995a49547c98a1
+        name:
+          type: string
+          example: Course 1
+        welcomeVideo:
+          type: string
+          example: <div style=\"padding:56.25% 0 0 0;position:relative;\"><iframe src=\"https://player.vimeo.com/video/719961126?h=ef28ea181b&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\" frameborder=\"0\" allow=\"autoplay; fullscreen; picture-in-picture\" allowfullscreen style=\"position:absolute;top:0;left:0;width:100%;height:100%;\" title=\"001001_heart\"></iframe></div><script src=\"https://player.vimeo.com/api/player.js\"></script>
+        descriptionDetails:
+          type: string
+          example: This is course description details
+        fee:
+          type: number
+          example: 1100
+        videoLessonHour:
+          type: number
+          example: 22
+        numberOfLectures:
+          type: number
+          example: 10
+        numberOfQuizzes:
+          type: number
+          example: 0
+        numberOfStudents:
+          type: number
+          example: 0
+        datePublished:
+          type: string
+          example: 2022-09-10T00:00:00.000Z
+        enrollStartDate:
+          type: string
+          example: 2022-06-19T19:05:06.195Z
+        rating:
+          type: number
+          example: 0
+        contents:
+          type: array
+          items:
+            type: object
+            required:
+              - title
+              - order
+            properties:
+              title:  
+                  type: string
+                  example: Content title 1
+              description:
+                  type: string
+                  example: This is content description
+              order:
+                  type: number
+                  example: 1
+              _id:
+                  type: string
+                  example: 62b54cf2df0a2995320b143b
+        instructions:
+          type: array
+          items:
+            type: object
+            required:
+              - title
+              - order
+            properties:
+              title:  
+                 type: string
+                 example: Instruction 1
+              description:
+                 type: string
+                 example: This is instruction description
+              order:
+                 type: number
+                 example: 1
+              _id:
+                  type: string
+                  example: 62b54cf2df0a2995320b143e
+        prerequisites:
+          type: array
+          items:
+            type: object
+            required:
+              - title
+              - order
+            properties:
+              title:  
+                 type: string
+                 example: Prerequisite 1
+              description:
+                 type: string
+                 example: This is prerequisite description
+              order:
+                 type: number
+                 example: 1
+              _id:
+                  type: string
+                  example: 62b54cf2df0a2995320b143f
+        syllabus:
+          type: object
+          required:
+            - part
+          properties:
+            part:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - title
+                    - order
+                    - resources
+                  properties:
+                    title:  
+                       type: string
+                       example: part 1
+                    description:
+                       type: string
+                       example: This is part description
+                    order:
+                       type: number
+                       example: 1
+                    resources:
+                       type: array
+                       items:
+                         type: object
+                         required: 
+                           - title
+                           - order
+                           - resourceId
+                         properties:
+                           title:  
+                              type: string
+                              example: topic 1
+                           description:
+                              type: string
+                              example: This is topic description
+                           order:
+                              type: number
+                              example: 1
+                           resourceId:
+                              type: string
+                              example: 62af7362b4995a49547c98a2
+                           _id:
+                              type: string
+                              example: 62b54cf2df0a2995320b1441
+                    _id:
+                       type: string
+                       example: 62b54cf2df0a2995320b1440
+        faqs:
+            type: array
+            items:
+              type: object
+              required:
+                - question
+                - answer
+                - order
+              properties:
+                question:  
+                   type: string
+                   example: Faq 1
+                answer:
+                   type: string
+                   example: This is faq 1 answer
+                order:
+                   type: number
+                   example: 1
+                _id:
+                   type: string
+                   example: 62b54cf2df0a2995320b1447
+        mentors:
+          type: array
+          items:
+            type: object
+            required:
+              - userId
+              - username
+              - mentorRating
+            properties:
+              userId:
+                type: string
+                example: 62115a7cd7fd542eadc2a88a
+              username:
+                type: string
+                example: sabbir
+              mentorRating:
+                type: number
+                example: 4.5
+              _id:
+                type: string
+                example: 629db35ce7fd7be165efcab6
+        isOffer:
+          type: boolean
+          example: false
+        offerExpiredDate:
+          type: string
+          example: 2022-06-19T19:05:06.195Z
+        offerPrice:
+          type: number
+          example: 9999999
+        offerDiscountPercentage:
+          type: number
+          example: 0
+        _id:
+          type: string
+          example: 629db35ce7fd7be165efcab2
+        createdAt:
+          type: string
+          example: 2022-06-24T05:34:42.842Z
+        updatedAt:
+          type: string
+          example: 2022-06-24T05:34:42.842Z
+        __v:
+          type: integer
+          example: 0
 
     buysubscriptionpackageresponse1:
       type: object
@@ -2131,6 +2394,223 @@ components:
         __v:
           type: integer
           example: 0
+
+    viewcoursedetailsresponse1:
+      type: object
+      properties:
+        syllabus:
+          type: object
+          required:
+            - part
+          properties:
+            part:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - title
+                    - order
+                    - resources
+                  properties:
+                    title:  
+                       type: string
+                       example: part 1
+                    description:
+                       type: string
+                       example: This is part description
+                    order:
+                       type: number
+                       example: 1
+                    resources:
+                       type: array
+                       items:
+                         type: object
+                         required: 
+                           - title
+                           - order
+                           - resourceId
+                         properties:
+                           title:  
+                              type: string
+                              example: topic 1
+                           description:
+                              type: string
+                              example: This is topic description
+                           order:
+                              type: number
+                              example: 1
+                           resourceId:
+                              type: string
+                              example: 62af7362b4995a49547c98a2
+                           _id:
+                              type: string
+                              example: 62b54cf2df0a2995320b1441
+                    _id:
+                       type: string
+                       example: 62b54cf2df0a2995320b1440
+        _id:
+          type: string
+          example: 62b54cf2df0a2995320b1440
+        courseId:
+          type: string
+          example: 62af7362b4995a49547c98a1
+        name:
+          type: string
+          example: Course 1
+        welcomeVideo:
+          type: string
+          example: <div style=\"padding:56.25% 0 0 0;position:relative;\"><iframe src=\"https://player.vimeo.com/video/719961126?h=ef28ea181b&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\" frameborder=\"0\" allow=\"autoplay; fullscreen; picture-in-picture\" allowfullscreen style=\"position:absolute;top:0;left:0;width:100%;height:100%;\" title=\"001001_heart\"></iframe></div><script src=\"https://player.vimeo.com/api/player.js\"></script>
+        descriptionDetails:
+          type: string
+          example: This is course description details
+        fee:
+          type: number
+          example: 1100
+        videoLessonHour:
+          type: number
+          example: 22
+        numberOfLectures:
+          type: number
+          example: 10
+        numberOfQuizzes:
+          type: number
+          example: 0
+        numberOfStudents:
+          type: number
+          example: 0
+        datePublished:
+          type: string
+          example: 2022-09-10T00:00:00.000Z
+        enrollStartDate:
+          type: string
+          example: 2022-06-19T19:05:06.195Z
+        rating:
+          type: number
+          example: 0
+        contents:
+          type: array
+          items:
+            type: object
+            required:
+              - title
+              - order
+            properties:
+              title:  
+                  type: string
+                  example: Content title 1
+              description:
+                  type: string
+                  example: This is content description
+              order:
+                  type: number
+                  example: 1
+              _id:
+                  type: string
+                  example: 62b54cf2df0a2995320b143b
+        instructions:
+          type: array
+          items:
+            type: object
+            required:
+              - title
+              - order
+            properties:
+              title:  
+                 type: string
+                 example: Instruction 1
+              description:
+                 type: string
+                 example: This is instruction description
+              order:
+                 type: number
+                 example: 1
+              _id:
+                  type: string
+                  example: 62b54cf2df0a2995320b143e
+        prerequisites:
+          type: array
+          items:
+            type: object
+            required:
+              - title
+              - order
+            properties:
+              title:  
+                 type: string
+                 example: Prerequisite 1
+              description:
+                 type: string
+                 example: This is prerequisite description
+              order:
+                 type: number
+                 example: 1
+              _id:
+                  type: string
+                  example: 62b54cf2df0a2995320b143f
+        faqs:
+            type: array
+            items:
+              type: object
+              required:
+                - question
+                - answer
+                - order
+              properties:
+                question:  
+                   type: string
+                   example: Faq 1
+                answer:
+                   type: string
+                   example: This is faq 1 answer
+                order:
+                   type: number
+                   example: 1
+                _id:
+                   type: string
+                   example: 62b54cf2df0a2995320b1447
+        mentors:
+          type: array
+          items:
+            type: object
+            required:
+              - userId
+              - username
+              - mentorRating
+            properties:
+              userId:
+                type: string
+                example: 62115a7cd7fd542eadc2a88a
+              username:
+                type: string
+                example: sabbir
+              mentorRating:
+                type: number
+                example: 4.5
+              _id:
+                type: string
+                example: 629db35ce7fd7be165efcab6
+        isOffer:
+          type: boolean
+          example: false
+        offerExpiredDate:
+          type: string
+          example: 2022-06-19T19:05:06.195Z
+        offerPrice:
+          type: number
+          example: 9999999
+        offerDiscountPercentage:
+          type: number
+          example: 0
+        createdAt:
+          type: string
+          example: 2022-06-24T05:34:42.842Z
+        updatedAt:
+          type: string
+          example: 2022-06-24T05:34:42.842Z
+        __v:
+          type: integer
+          example: 0
+
         
     
     viewallsubscriptionpackage1:
@@ -2898,6 +3378,141 @@ components:
           type: boolean
           example: true
 
+    createcoursedetails1:
+      type: object
+      required:
+        - courseId
+        - welcomeVideo
+        - descriptionDetails
+        - contents
+        - instructions
+        - prerequisites
+        - syllabus
+      properties:
+        courseId:
+          type: string
+          example: 62af7362b4995a49547c98a1
+        welcomeVideo:
+          type: string
+          example: <div style=\"padding:56.25% 0 0 0;position:relative;\"><iframe src=\"https://player.vimeo.com/video/719961126?h=ef28ea181b&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\" frameborder=\"0\" allow=\"autoplay; fullscreen; picture-in-picture\" allowfullscreen style=\"position:absolute;top:0;left:0;width:100%;height:100%;\" title=\"001001_heart\"></iframe></div><script src=\"https://player.vimeo.com/api/player.js\"></script>
+        descriptionDetails:
+          type: number
+          example: This is course description details
+        contents:
+          type: array
+          items:
+            type: object
+            required:
+              - title
+              - order
+            properties:
+              title:  
+                  type: string
+                  example: Content title 1
+              description:
+                  type: string
+                  example: This is content description
+              order:
+                  type: number
+                  example: 1
+        instructions:
+          type: array
+          items:
+            type: object
+            required:
+              - title
+              - order
+            properties:
+              title:  
+                 type: string
+                 example: Instruction 1
+              description:
+                 type: string
+                 example: This is instruction description
+              order:
+                 type: number
+                 example: 1
+        prerequisites:
+          type: array
+          items:
+            type: object
+            required:
+              - title
+              - order
+            properties:
+              title:  
+                 type: string
+                 example: Prerequisite 1
+              description:
+                 type: string
+                 example: This is prerequisite description
+              order:
+                 type: number
+                 example: 1
+        syllabus:
+          type: object
+          required:
+            - part
+          properties:
+            part:
+                type: array
+                items:
+                  type: object
+                  required:
+                    - title
+                    - order
+                    - resources
+                  properties:
+                    title:  
+                       type: string
+                       example: part 1
+                    description:
+                       type: string
+                       example: This is part description
+                    order:
+                       type: number
+                       example: 1
+                    resources:
+                       type: array
+                       items:
+                         type: object
+                         required: 
+                           - title
+                           - order
+                           - resourceId
+                         properties:
+                           title:  
+                              type: string
+                              example: topic 1
+                           description:
+                              type: string
+                              example: This is topic description
+                           order:
+                              type: number
+                              example: 1
+                           resourceId:
+                              type: string
+                              example: 62af7362b4995a49547c98a2
+        faqs:
+            type: array
+            items:
+              type: object
+              required:
+                - question
+                - answer
+                - order
+              properties:
+                question:  
+                   type: string
+                   example: Faq 1
+                answer:
+                   type: string
+                   example: This is faq 1 answer
+                order:
+                   type: number
+                   example: 1
+
+
     buysubscriptionpackage1:
       type: object
       properties:
@@ -3259,6 +3874,31 @@ components:
             example: 
             $ref: '#/components/schemas/createcourseresponse1'
   
+    createcoursedetailsResponse:
+      type: object
+      properties:
+        isSuccess:
+          type: boolean
+          example: true
+        statusCode:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: Course details created succesfully
+        developerMessage:
+          type: string
+          example:
+        isReadOnly:
+          type: boolean
+          example: false
+        data:
+          type: array
+          items:
+            type: string
+            example: 
+            $ref: '#/components/schemas/createcoursedetailsresponse1'
+
     buysubscriptionpackageResponse:
       type: object
       properties:
@@ -3398,6 +4038,31 @@ components:
             type: string
             example: 
             $ref: '#/components/schemas/viewallcourseresponse1'
+
+    viewcoursedetailsresponse:
+      type: object
+      properties:
+        isSuccess:
+          type: boolean
+          example: true
+        statusCode:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: Course details viewed succesfully
+        developerMessage:
+          type: string
+          example:
+        isReadOnly:
+          type: boolean
+          example: false
+        data:
+          type: array
+          items:
+            type: string
+            example: 
+            $ref: '#/components/schemas/viewcoursedetailsresponse1'
            
 
 
@@ -3500,6 +4165,17 @@ components:
           schema:
             $ref: '#/components/schemas/createcourse1'
       description: Course to be created
+      required: true
+
+    createcoursedetails:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/createcoursedetails1'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/createcoursedetails1'
+      description: Course Details to be created
       required: true
 
     buysubscriptionpackage:
