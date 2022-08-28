@@ -253,6 +253,31 @@ paths:
 #    requestBody:
  #       $ref: '#/components/requestBodies/GetImage'
 
+  /addmentordetails:
+    post:
+      tags:
+        - Auth Service
+      summary: Add Mentor Details
+      operationId: addmentordetails
+      responses:
+        '405':
+          description: Invalid input
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/addmentordetailsresponse'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/addmentordetailsresponse'
+      requestBody:
+        $ref: '#/components/requestBodies/addmentordetails'
+
   /QuizServiceTest:
     get:
       tags:
@@ -694,6 +719,77 @@ paths:
                 items:
                   $ref: '#/components/schemas/buysubscriptionpackageResponse'
           
+  
+  /getprofinfo:
+    get:
+      tags:
+        - Admin Service
+      summary: Get Prof Info
+      operationId: getprofinfo
+      responses:
+        '405':
+          description: Invalid input
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/getprofinfo'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/getprofinfo'
+            
+  /getmentordetails:
+    get:
+      tags:
+        - Admin Service
+      summary: Get Mentor Details
+      operationId: getmentordetails
+      responses:
+        '405':
+          description: Invalid input
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/getmentordetails'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/getmentordetails'
+  
+  /viewallvideoresources:
+    get:
+      tags:
+        - Admin Service
+      summary: View All Video Resources
+      operationId: viewallvideoresources
+      responses:
+        '405':
+          description: Invalid input
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/viewallvideoresources'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/viewallvideoresources'
+  
+  
   /GenerateToken:
     get:
       tags:
@@ -1050,11 +1146,171 @@ components:
       xml:
         name: User Create
 
+    addmentordetailsresponse2:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 627c674588b736b66485dec2
+        fullName:
+          type: string
+          example: Md Shamsuddoha Russel
+        nickName:
+          type: string
+          example: Russel9401222
+        username:
+          type: string
+          example: Russel9401222
+        currentInstitute:
+          type: string
+          example: Kernel
+        currentPosition:
+          type: string
+          example: Worker
+        phone:
+          type: array
+          items:
+            type: string
+            example: ["01762694455"]
+        email:
+          type: array
+          items:
+            type: string
+            example: ["a@gmail.com"]
+        role:
+          type: array
+          items:
+            type: string
+            example: ["user", "mentor"]
+        isPhoneVerified:
+          type: boolean
+          example: false
+        isVerified:
+          type: boolean
+          example: false
+        rating:
+          type: array
+          items:
+            type: string
+            example: 
+        createdAt:
+          type: string
+          example: 2022-03-15T18:18:05.546Z
+        updatedAt:
+          type: string
+          example: 2022-03-15T18:18:05.546Z
+        __v:
+          type: integer
+          example: 0
+
+    mentorDetailsresponse2:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 627c674588b736b66485dec2
+        userId:
+          type: string
+          example: 6306ccbbd1e44089ab703d57
+        description:
+          type: string
+          example: This is mentor
+        prevInstitute:
+          type: array
+          items:
+            type: string
+            example: ["ABC Institute", "DEF Institute"]
+        currentInstitute:
+          type: array
+          items:
+            type: string
+            example: ["ABC Institute", "DEF Institute"]
+        expertise:
+          type: array
+          items:
+            type: string
+            example: ["Anatomy", "Physiology"]
+        experience:
+          type: array
+          items:
+            type: string
+            example: ["Unmesh", "Delta"]
+        qualification:
+          type: array
+          items:
+            type: string
+            example: ["MBBS"]
+        identification:
+          $ref: '#/components/schemas/iden3'
+        awards:
+          $ref: '#/components/schemas/awards3'
+        mentorRating:
+          type: array
+          items:
+            type: string
+            example: []
+        createdAt:
+          type: string
+          example: 2022-03-15T18:18:05.546Z
+        updatedAt:
+          type: string
+          example: 2022-03-15T18:18:05.546Z
+        __v:
+          type: integer
+          example: 0
+
+
     UserAuth2:
       type: object
       properties:
         user:
           $ref: '#/components/schemas/UserAuth3'
+
+    iden2:
+      type: array
+      items: 
+          type: object
+          properties:
+            name:
+              type: string
+              example: Medical College Id card
+            image:
+              type: string
+              example: id card image
+
+    iden3:
+      type: array
+      items: 
+          type: object
+          properties:
+            _id:
+              type: string
+              example: 630928de93bd74c0a67f30ff
+
+      
+        
+
+    awards2:
+      type: array
+      items: 
+          type: object
+          properties:
+            name:
+              type: string
+              example: Best mentor 2021
+            image:
+              type: string
+              example: award image
+
+    awards3:
+      type: array
+      items: 
+          type: object
+          properties:
+             _id:
+              type: string
+              example: 630928de93bd74c0a67f3101
+  
 
     UserAuth3:
       type: object
@@ -2429,6 +2685,20 @@ components:
           items:
            $ref: '#/components/schemas/buysubscriptionpackage2'
 
+    infosss:
+      type: object
+      properties:
+        topicName:
+          type: string
+          example: Gross Anatomy
+        topicOverview:
+          type: string
+          example: Gross Anatomy overview
+        courses:
+          type: array
+          items:
+           $ref: '#/components/schemas/courses2'
+    
     subscriptionsss:
       type: object
       properties:
@@ -2438,6 +2708,26 @@ components:
         courseIds:
           type: string
           example: 62af7362b4995a49547c98a1
+
+    courses2:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 000001
+        term:
+          type: string
+          example: term-1
+        card:
+          type: string
+          example: card-1
+        name:
+          type: string
+          example: Thorax
+        preview:
+          type: string
+          example: image link
+        
 
     buysubscriptionpackage2:
       type: object
@@ -2498,6 +2788,80 @@ components:
         _id:
           type: string
           example: 62af7362b4995a49547c98a2
+    
+
+    infoss:
+      type: object
+      properties:
+        prof:
+          type: number
+          example: 1
+        sectionName:
+          type: string
+          example: Anatomy
+        sectionDesc:
+          type: string
+          example: optional desc
+        topics:
+          $ref: '#/components/schemas/infosss'
+
+    profiless:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 6306ccbbd1e44089ab703d57
+        fullName:
+          type: string
+          example: Md Sabbir Rahman
+        nickName:
+          type: string
+          example: Sabbir
+        username:
+          type: string
+          example: sabbir
+        currentInstitute:
+          type: string
+          example: IUT
+        currentPosition:
+          type: string
+          example: Student
+        phone:
+          type: array
+          items:
+            type: string
+            example: "01890609381"
+        email:
+          type: array
+          items:
+            type: string
+            example: "sabbirrahman42@iut-dhaka.edu"
+        role:
+          type: array
+          items:
+            type: string
+            example: [ "user", "mentor" ]
+        isPhoneVerified:
+          type: boolean
+          example: true
+        isVerified:
+          type: boolean
+          example: false
+        rating:
+          type: array
+          items:
+            type: string
+            example:
+        createdAt:
+          type: string
+          example: 2022-05-02T07:39:05.140Z
+        updatedAt:
+          type: string
+          example: 2022-05-02T07:39:05.140Z
+        __v:
+          type: integer
+          example: 0
+        
 
     subscriptionss:
       type: object
@@ -2939,6 +3303,61 @@ components:
           type: integer
           example: 0
 
+    getprofinfo1:
+      type: object
+      properties:
+        info:
+         $ref: '#/components/schemas/infoss'
+
+    getmentordetails1:
+      type: object
+      properties:
+        profile:
+         $ref: '#/components/schemas/profiless'
+
+    viewallvideoresources1:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 63007117be20c9b6aabf61fe
+        title:
+          type: string
+          example: Embryology Class-5
+        videoId:
+          type: string
+          example: 003005
+        vimeoId:
+          type: string
+          example: 722501268
+        videoDescription:
+          type: string
+          example: This is a video about Embryology
+        videoLink:
+          type: string
+          example: https://vimeo.com/722501268
+        iframeLink:
+          type: string
+          example: <div style=\"padding:75% 0 0 0;position:relative;\"><iframe src=\"https://player.vimeo.com/video/722501268?h=df8cf58db0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\" frameborder=\"0\" allow=\"autoplay; fullscreen; picture-in-picture\" allowfullscreen style=\"position:absolute;top:0;left:0;width:100%;height:100%;\" title=\"Embryology Class-5.mp4\"></iframe></div><script src=\"https://player.vimeo.com/api/player.js\"></script>
+        dateAdded:
+          type: string
+          example: 2022-08-12T14:12:29.765Z
+        videoDurationMinutes:
+          type: number
+          example: 93.05
+        videoSizeInMb:
+          type: string
+          example: 234
+        createdAt:
+          type: string
+          example: 2022-06-24T05:34:42.842Z
+        updatedAt:
+          type: string
+          example: 2022-06-24T05:34:42.842Z
+        __v:
+          type: integer
+          example: 0
+
 
     viewallsubscriptionpackage1:
       type: object
@@ -3195,16 +3614,21 @@ components:
     Users:
       type: object
       required:
-        - name
-        - username
+        - fullName
+        - nickName
         - password
         - passwordConfirmation
         - currentInstitute
         - currentPosition
+        - phone
+        - email
       properties:
-        name:
+        fullName:
           type: string
           example: Md Shamsuddoha Russel
+        nickName:
+          type: string
+          example: Russel9401222
         username:
           type: string
           example: Russel9401222
@@ -3225,6 +3649,60 @@ components:
           items:
             type: string
             example: ["01762694455"]
+        email:
+          type: array
+          items:
+            type: string
+            example: ["a@gmail.com"]
+        isMentor:
+          type: boolean
+          example: True
+
+    addmentordetailss:
+      type: object
+      required:
+        - userId
+        - description
+      properties:
+        userId:
+          type: string
+          example: 6306ccbbd1e44089ab703d57
+        description:
+          type: string
+          example: This is mentor
+        prevInstitute:
+          type: array
+          items:
+            type: string
+            example: ["ABC Institute", "DEF Institute"]
+        currentInstitute:
+          type: array
+          items:
+            type: string
+            example: ["ABC Institute", "DEF Institute"]
+        expertise:
+          type: array
+          items:
+            type: string
+            example: ["Anatomy", "Physiology"]
+        experience:
+          type: array
+          items:
+            type: string
+            example: ["Unmesh", "Delta"]
+        qualification:
+          type: array
+          items:
+            type: string
+            example: ["MBBS"]
+        nid:
+          type: string
+          example: 012345679
+        identification:
+          $ref: '#/components/schemas/iden2'
+        awards:
+          $ref: '#/components/schemas/awards2'
+        
           
     UserAuth:
       type: object
@@ -3267,6 +3745,34 @@ components:
           example: false
         data:
           $ref: '#/components/schemas/UserCreate2'
+
+    addmentordetailsresponse:
+      type: object
+      properties:
+        isSuccess:
+          type: boolean
+          example: true
+        statusCode:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: Mentor details created successfully
+        developerMessage:
+          type: string
+          example:
+        isReadOnly:
+          type: boolean
+          example: false
+        data:
+                type: array
+                items:
+                  type: object
+                  properties:
+                     profile:
+                         $ref: '#/components/schemas/addmentordetailsresponse2'
+                     mentorDetails:
+                         $ref: '#/components/schemas/mentorDetailsresponse2'
         
           
     createotpresponse:
@@ -4556,6 +5062,81 @@ components:
             type: string
             example: 
             $ref: '#/components/schemas/getitemofhomepageresponse1' 
+    
+    getprofinfo:
+      type: object
+      properties:
+        isSuccess:
+          type: boolean
+          example: true
+        statusCode:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: Home page item viewed succesfully
+        developerMessage:
+          type: string
+          example:
+        isReadOnly:
+          type: boolean
+          example: false
+        data:
+          type: array
+          items:
+            type: string
+            example: 
+            $ref: '#/components/schemas/getprofinfo1' 
+
+    getmentordetails:
+      type: object
+      properties:
+        isSuccess:
+          type: boolean
+          example: true
+        statusCode:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: All mentor details viewed succesfully
+        developerMessage:
+          type: string
+          example:
+        isReadOnly:
+          type: boolean
+          example: false
+        data:
+          type: array
+          items:
+            type: string
+            example: 
+            $ref: '#/components/schemas/getmentordetails1'
+    
+    viewallvideoresources:
+      type: object
+      properties:
+        isSuccess:
+          type: boolean
+          example: true
+        statusCode:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: Video resources viewed succesfully
+        developerMessage:
+          type: string
+          example:
+        isReadOnly:
+          type: boolean
+          example: false
+        data:
+          type: array
+          items:
+            type: string
+            example: 
+            $ref: '#/components/schemas/viewallvideoresources1'
 
     viewallsubscriptionpackageResponse:
       type: object
@@ -4717,6 +5298,17 @@ components:
         application/xml:
           schema:
             $ref: '#/components/schemas/Users'
+      description: Users to be added
+      required: true
+
+    addmentordetails:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/addmentordetailss'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/addmentordetailss'
       description: Users to be added
       required: true
     
