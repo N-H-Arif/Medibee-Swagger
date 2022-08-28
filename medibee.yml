@@ -1326,9 +1326,6 @@ components:
           items: 
             type: string
             example: [user, super-admin, admin]
-        sessionId:
-          type: string
-          example: 62604fa66f5e20566df3b61a
         iat:
           type: integer
           example: 1652225843
@@ -1344,15 +1341,15 @@ components:
         _id:
           type: string
           example: 621154236a0a6e212b9aebf6
-        name: 
+        fullName: 
           type: string
           example: Md Sabbir Rahman
+        nickName:
+          type: string
+          example: Russel940sssss
         username:
           type: string
-          example: sabbir
-        image:
-          type: string
-          example: 4b6b4f72d7ed0e7f2e5010e94688ea36
+          example: russel940sssss625
         currentInstitute:
           type: string
           example: IUT
@@ -1403,18 +1400,18 @@ components:
         _id:
           type: string
           example: 621154236a0a6e212b9aebf6
-        name:
+        fullName:
           type: string
           example: Md Sabbir Rahman
+        nickName:
+          type: string
+          example: sabbir
         username:
           type: string
           example: sabbir
         password:
           type: string
           example: $2b$10$/./tPs1rbAJJz3031iS7NOyqq5ae6dqbqFCMFYcjYRXnIpgD5cwlu
-        image:
-          type: string
-          example: 4b6b4f72d7ed0e7f2e5010e94688ea36
         currentInstitute:
           type: string
           example: Kernel
@@ -1786,9 +1783,9 @@ components:
         _id:
           type: string
           example: 621165aa35a0a066396c1fd6
-        userId:
+        username:
           type: string
-          example: 62115a7cd7fd542eadc2a88
+          example: russel940sssss625
         __v:
           type: integer
           example: 0
@@ -1800,7 +1797,7 @@ components:
           example: "2022-05-11T09:16:46.226Z"
         otp:
           type: string
-          example: 770298
+          example: 3142
         phone:
           type: string
           example: "01762694455"
@@ -2112,15 +2109,15 @@ components:
         _id:
           type: string
           example: 62115a7cd7fd542eadc2a88a
-        name:
+        fullName:
           type: string
           example: Md Shamsuddoha Russel
+        nickNname:
+          type: string
+          example: Russel
         username:
           type: string
           example: Russel
-        subject:
-          type: string
-          example: Math
         password:
           type: string
           example: $2b$10$dlqjqglQk8U/muVpaioCV.l56K1JPBxgV3Oe5YZ464CGS47SMho.6
@@ -2175,6 +2172,9 @@ components:
         slug:
           type: string
           example: medi13
+        subscriptionsType:
+          type: string
+          example: mbbs-monthly
         packageIncludes:
           $ref: '#/components/schemas/addsubscriptionpackage2'
         description:
@@ -2191,15 +2191,21 @@ components:
         fee:
           type: integer
           example: 500
+        isOffer:
+          type: boolean
+          example: false
+        offerPrice:
+          type: integer
+          example: 99999
+        offerDiscountPercentage:
+          type: integer
+          example: 0
         validityInDays:
           type: number
           example: 365
         startTime:
           type: string
           example: 2022-06-01T00:00:00.000Z
-        endTime:
-          type: string
-          example: 2023-06-01T00:00:00.000Z
         enrolledStartTime:
           type: string
           example: 2022-07-01T00:00:00.000Z
@@ -2212,6 +2218,9 @@ components:
         _id:
           type: string
           example: 627eefe2184c08a3db9a7c63
+        offerExpiredDate:
+          type: string
+          example: 2022-05-13T23:55:14.330Z
         createdAt:
           type: string
           example: 2022-05-13T23:55:14.330Z
@@ -2237,9 +2246,6 @@ components:
         description:
           type: string
           example: This is course decription
-        fee:
-          type: number
-          example: 1100
         videoLessonHour:
           type: number
           example: 22
@@ -2270,6 +2276,21 @@ components:
             - mbbs
             - admission
             - post-grad
+        year:
+          type: number
+          example: 1
+        subject:
+          type: string
+          example: anatomy
+        subjectDivision:
+          type: string
+          example: gross-anatomy
+        term:
+          type: number
+          example: 1
+        card:
+          type: number
+          example: 1
         isVerified:
           type: boolean
           example: false
@@ -2341,15 +2362,12 @@ components:
         name:
           type: string
           example: Course 1
-        welcomeVideo:
+        welcomeVideoResourceId:
           type: string
-          example: <div style=\"padding:56.25% 0 0 0;position:relative;\"><iframe src=\"https://player.vimeo.com/video/719961126?h=ef28ea181b&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\" frameborder=\"0\" allow=\"autoplay; fullscreen; picture-in-picture\" allowfullscreen style=\"position:absolute;top:0;left:0;width:100%;height:100%;\" title=\"001001_heart\"></iframe></div><script src=\"https://player.vimeo.com/api/player.js\"></script>
+          example: 62e2162ac567ca999fd52466
         descriptionDetails:
           type: string
           example: This is course description details
-        fee:
-          type: number
-          example: 1100
         videoLessonHour:
           type: number
           example: 22
@@ -2523,18 +2541,6 @@ components:
               _id:
                 type: string
                 example: 629db35ce7fd7be165efcab6
-        isOffer:
-          type: boolean
-          example: false
-        offerExpiredDate:
-          type: string
-          example: 2022-06-19T19:05:06.195Z
-        offerPrice:
-          type: number
-          example: 9999999
-        offerDiscountPercentage:
-          type: number
-          example: 0
         _id:
           type: string
           example: 629db35ce7fd7be165efcab2
@@ -2558,6 +2564,9 @@ components:
               type: string
               example: Different types of fluid
             videoId:
+              type: string
+              example: "001003"
+            vimeoId:
               type: string
               example: "001003"
             videoDescription:
@@ -2873,13 +2882,16 @@ components:
           example: 626f8a99e46ae286ade5643b
         title:
           type: string
-          example: Admission model test
+          example: Mbbs course
         slug:
           type: string
           example: medi1
+        subscriptionsType:
+          type: string
+          example: mbbs-monthly
         description:
           type: string
-          example: This is for admission candidate
+          example: mbbs course subscription
         intervalType:
           type: string
           example: one-time
@@ -2889,15 +2901,21 @@ components:
         fee:
           type: integer
           example: 500
+        isOffer:
+          type: boolean
+          example: false
+        offerPrice:
+          type: integer
+          example: 99999
+        offerDiscountPercentage:
+          type: integer
+          example: 0
         validityInDays:
           type: integer
           example: 365
         startTime:
           type: string
           example: 2022-06-01T00:00:00.000Z
-        endTime:
-          type: string
-          example: 2023-06-01T00:00:00.000Z
         enrolledStartTime:
           type: string
           example: 2022-07-01T00:00:00.000Z
@@ -2907,6 +2925,9 @@ components:
         maxEnrolledCount:
           type: integer
           example: 30
+        offerExpiredDate:
+          type: string
+          example: 2023-06-01T00:00:00.000Z
         createdAt:
           type: string
           example: 2022-05-02T07:39:05.140Z
@@ -2923,9 +2944,12 @@ components:
         _id:
           type: string
           example: 621154236a0a6e212b9aebf6
-        name:
+        fullName:
           type: string
           example: Md Sabbir Rahman
+        nickName:
+          type: string
+          example: sabbir1
         username:
           type: string
           example: sabbir
@@ -2979,10 +3003,10 @@ components:
           example: 343erget4343334
         name:
           type: string
-          example: Medibee olympiad
+          example: Homepage
         img:
           type: string
-          example:
+          example: https://kernel-medibee-public.s3.ap-southeast-1.amazonaws.com/Frame+19042.svg
         priority:
           type: integer
           example: 1
@@ -2995,6 +3019,65 @@ components:
         description:
           type: string
           example: Test your skills against student from across the country
+
+    getitemofhomepageresponse2:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 343erget4343334
+        name:
+          type: string
+          example: Packages
+        img:
+          type: string
+          example: https://kernel-medibee-public.s3.ap-southeast-1.amazonaws.com/Frame+19042.svg
+        priority:
+          type: integer
+          example: 1
+        category:
+          type: string
+          example: medical_admission
+        subcategory:
+          type: string
+          example:    
+        description:
+          type: string
+          example: 
+
+    getitemofhomepageresponse3:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 343erget4343334
+        name:
+          type: string
+          example: Course
+        img:
+          type: string
+          example: https://kernel-medibee-public.s3.ap-southeast-1.amazonaws.com/Frame+19042.svg
+        priority:
+          type: integer
+          example: 1
+        
+
+    getitemofhomepageresponse4:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 343erget4343334
+        name:
+          type: string
+          example: Course
+        img:
+          type: string
+          example: https://kernel-medibee-public.s3.ap-southeast-1.amazonaws.com/Frame+19042.svg
+        priority:
+          type: integer
+          example: 1
+        
     
     viewallcourseresponse1:
       type: object
@@ -3052,6 +3135,21 @@ components:
         category:
           type: string
           example: mbbs
+        year:
+          type: number
+          example: 1
+        subject:
+          type: string
+          example: anatomy
+        subjectDivision:
+          type: string
+          example: gross-anatomy
+        term:
+          type: number
+          example: 1
+        card:
+          type: number
+          example: 1
         isVerified:
           type: boolean
           example: true
@@ -3598,12 +3696,12 @@ components:
     Userlogin:
       type: object
       required:
-        - username
+        - phone
         - password
       properties:
-        username:
+        phone:
           type: string
-          example: sabbir
+          example: 01762694452
         password:
           type: string
           example: 123456
@@ -4245,6 +4343,9 @@ components:
         slug:
           type: string
           example: medi4
+        subscriptionsType:
+          type: string
+          example: mbbs-monthly
         packageIncludes:
           $ref: '#/components/schemas/addsubscriptionpackage2' 
         description:
@@ -4296,22 +4397,20 @@ components:
         - videoLessonHour
         - datePublished
         - numberOfLectures
+        - subject
+        - subjectDivision
+        - term
+        - card
       properties:
         name:
           type: string
           example: Course 1
-        icon:
-          type: string
-          example: 
         slug:
           type: string
           example: course94
         description:
           type: string
           example: This is course decription
-        fee:
-          type: number
-          example: 1100
         videoLessonHour:
           type: number
           example: 22
@@ -4327,36 +4426,27 @@ components:
         numberOfQuizzes:
           type: number
           example: 10
-        rating:
-          type: number
         category:
           type: string
           enum:
             - mbbs
             - admission
             - post-grad
-        resources:
-          type: array
-          items:
-            type: object
-            required:
-              - id
-              - order
-              - type
-            properties:
-              id:
-                type: string
-                example: 62115a7cd7fd542eadc2a88a
-              order:
-                type: number
-                example: 1
-              type:
-                type: array
-                items:
-                  enum:
-                    - video
-                    - quiz
-                    - notes
+        year:
+          type: number
+          example: 1
+        subject:
+          type: string
+          example: anatomy
+        subjectDivision:
+          type: string
+          example: gross-anatomy
+        term:
+          type: number
+          example: 1
+        card:
+          type: number
+          example: 1
         enrolledStartDate:
           type: string
           example: 2022-09-10
@@ -4389,7 +4479,7 @@ components:
       type: object
       required:
         - courseId
-        - welcomeVideo
+        - welcomeVideoResourceId
         - descriptionDetails
         - contents
         - instructions
@@ -4399,9 +4489,9 @@ components:
         courseId:
           type: string
           example: 62af7362b4995a49547c98a1
-        welcomeVideo:
+        welcomeVideoResourceId:
           type: string
-          example: <div style=\"padding:56.25% 0 0 0;position:relative;\"><iframe src=\"https://player.vimeo.com/video/719961126?h=ef28ea181b&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\" frameborder=\"0\" allow=\"autoplay; fullscreen; picture-in-picture\" allowfullscreen style=\"position:absolute;top:0;left:0;width:100%;height:100%;\" title=\"001001_heart\"></iframe></div><script src=\"https://player.vimeo.com/api/player.js\"></script>
+          example: 62e2162ac567ca999fd52466
         descriptionDetails:
           type: number
           example: This is course description details
@@ -4527,6 +4617,7 @@ components:
       required:
         - title
         - videoId
+        - vimeoId
         - videoDescription
         - videoLink
         - iframeLink
@@ -4537,6 +4628,9 @@ components:
         videoId:
           type: string
           example: "001003"
+        vimeoId:
+          type: string
+          example: "722505271"
         videoDescription:
           type: string
           example: This is a video course decription
@@ -5059,9 +5153,33 @@ components:
         data:
           type: array
           items:
-            type: string
-            example: 
-            $ref: '#/components/schemas/getitemofhomepageresponse1' 
+            type: object
+            properties:
+              carosoul:
+               type: array
+               items:
+                  type: string
+                  example: 
+                  $ref: '#/components/schemas/getitemofhomepageresponse1' 
+              admission:
+               type: array
+               items:
+                  type: string
+                  example: 
+                  $ref: '#/components/schemas/getitemofhomepageresponse2'
+              mbbs:
+               type: array
+               items:
+                  type: string
+                  example: 
+                  $ref: '#/components/schemas/getitemofhomepageresponse3'
+              post-grad:
+               type: array
+               items:
+                  type: string
+                  example: 
+                  $ref: '#/components/schemas/getitemofhomepageresponse4'
+           
     
     getprofinfo:
       type: object
