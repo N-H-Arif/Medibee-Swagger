@@ -454,7 +454,7 @@ paths:
       tags:
         - Quiz Service
       summary: Get Quiz
-      operationId: /GetQuiz
+      operationId: GetQuiz
       responses:
         '200':
           description: successful operation
@@ -477,7 +477,7 @@ paths:
       tags:
         - Quiz Service
       summary: Get Subscribed Quiz
-      operationId: /GetSubscribedQuiz
+      operationId: GetSubscribedQuiz
       security:
         - Bearer: []
       responses:
@@ -529,7 +529,7 @@ paths:
       tags:
         - Quiz Service
       summary: Get Realtime Quiz Rank
-      operationId: /GetRealtimeQuizRank
+      operationId: GetRealtimeQuizRank
       responses:
         '200':
           description: successful operation
@@ -546,6 +546,55 @@ paths:
                   $ref: '#/components/schemas/GetRealtimeQuizRank'
         '400':
           description: Not Authenticated
+
+  /Addprofmodeltest:
+    post:
+      tags:
+        - Quiz Service
+      summary: Add Prof Model Test
+      operationId: addprofmodeltest
+      responses:
+        '405':
+          description: Invalid input
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/addprofmodeltestResponse'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/addprofmodeltestResponse'
+      requestBody:
+        $ref: '#/components/requestBodies/addprofmodeltest'
+  
+  /viewallprofmodeltest:
+    get:
+      tags:
+        - Quiz Service
+      summary: View All Prof Model Test
+      operationId: viewallprofmodeltest
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/viewprof'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/viewprof'
+        '400':
+          description: Not Authenticated
+
 
   /addadmin:
     post:
@@ -1590,12 +1639,12 @@ components:
           type: array
           items:
             type: string
-            example: [626de4c75677750cb40cbd07, 627a7eb8ed2c698c34f8940a] 
+            example: [62e40ca83715dacd3b1e5699] 
         courseIds:
           type: array
           items:
             type: string
-            example:
+            example: [62e40ed6c567ca999fd5246c]
 
     qwithans:
       type: object
@@ -1773,6 +1822,39 @@ components:
         updatedAt:
           type: string
           example: "2022-05-10T11:15:11.973Z"
+        __v:
+          type: integer
+          example: 0
+
+    adddprof:
+      type: object
+      properties:
+        prof:
+          type: string
+          example: second
+        instruction:
+          type: array
+          items:
+            type: string
+            example: ["first instruction", "second instruction"]
+        description:
+          type: string
+          example: This is a description
+        quizId:
+          type: string
+          example: 63015293b44fc7b8ff366d73
+        startTime:
+          type: string
+          example: 2022-11-16
+        endTime:
+          type: string
+          example: 2022-12-16
+        passMark:
+          type: number
+          example: 10
+        _id:
+          type: string
+          example: 6313061e283020fb34d8a3d4
         __v:
           type: integer
           example: 0
@@ -2074,6 +2156,39 @@ components:
         totalMark:
           type: number
           example: 4.5
+
+    viewprofresponse1:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 6313061e283020fb34d8a3d4
+        prof:
+          type: string
+          example: second
+        instruction:
+          type: array
+          items:
+            type: string
+            example: ["first instruction", "second instruction"]
+        description:
+          type: string
+          example: This is a description
+        quizId:
+          type: string
+          example: 63015293b44fc7b8ff366d73
+        startTime:
+          type: string
+          example: 2022-11-16
+        endTime:
+          type: string
+          example: 2022-12-16
+        passMark:
+          type: number
+          example: 10
+        __v:
+          type: integer
+          example: 0
         
 
     createmeetingresponse1:
@@ -4271,6 +4386,43 @@ components:
           type: string
           example: 625a162d4af6c2e2cfbd1d2c
 
+    addproff:
+      type: object
+      required:
+        - prof
+        - instruction
+        - description
+        - quizId
+        - startTime
+      properties:
+        prof:
+          type: string
+          enum:
+            - first
+            - second
+            - third
+            - final
+        instruction:
+          type: array
+          items:
+            type: string
+            example: ["first instruction", "second instruction"]
+        description:
+          type: string
+          example: This is a description
+        quizId:
+          type: string
+          example: 63015293b44fc7b8ff366d73
+        startTime:
+          type: string
+          example: 2022-11-16
+        endTime:
+          type: string
+          example: 2022-12-16
+        passMark:
+          type: number
+          example: 10
+
     SubmitquizResponse:
       type: object
       required:
@@ -4829,6 +4981,27 @@ components:
             type: string
             example: 
             $ref: '#/components/schemas/submitquizresponse1'
+    
+    addprofmodeltestResponse:
+      type: object
+      properties:
+        isSuccess:
+          type: boolean
+          example: true
+        statusCode:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: Model Prof Model Test Created Succesfully
+        developerMessage:
+          type: string
+          example:
+        isReadOnly:
+          type: boolean
+          example: false
+        data:
+          $ref: '#/components/schemas/adddprof'
 
     GetallMCQ:
        type: object
@@ -4907,7 +5080,35 @@ components:
           items:
             type: string
             example: 
-            $ref: '#/components/schemas/getrealtimequizrankresponse1' 
+            $ref: '#/components/schemas/getrealtimequizrankresponse1'
+
+    viewprof:
+       type: object
+       properties:
+        isSuccess:
+          type: boolean
+          example: true
+        statusCode:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: Prof Model Test Not Viewed
+        developerMessage:
+          type: string
+          example:
+        isReadOnly:
+          type: boolean
+          example: false
+        data:
+          type: object
+          properties:
+           modelTests:
+            type: array
+            items:
+              example: 
+              $ref: '#/components/schemas/viewprofresponse1'
+            
       
     createmeeting:
        type: object
@@ -5484,6 +5685,17 @@ components:
           schema:
             $ref: '#/components/schemas/MCQcollection'
       description: MCQ Collection to be created
+      required: true
+    
+    addprofmodeltest:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/addproff'
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/addproff'
+      description: Prof Model Test to be added
       required: true
 
     SubmitQuizResponse:
