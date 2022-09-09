@@ -838,7 +838,29 @@ paths:
                 items:
                   $ref: '#/components/schemas/viewallvideoresources'
   
-  
+  /getadmissioninfo:
+    get:
+      tags:
+        - Admin Service
+      summary: Get Admission Info
+      operationId: getadmissioninfo
+      responses:
+        '405':
+          description: Invalid input
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/getadmissioninfo'
+            application/xml:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/getadmissioninfo'
+
   /GenerateToken:
     get:
       tags:
@@ -1633,18 +1655,37 @@ components:
     addsubscriptionpackage2:
       type: object
       required:
+        - courseIds
         - quizIds
+        - videoIds
+        - courseResourcesIds
+        - elibraryResourcesIds
       properties:
-        quizIds:
-          type: array
-          items:
-            type: string
-            example: [62e40ca83715dacd3b1e5699] 
         courseIds:
           type: array
           items:
             type: string
-            example: [62e40ed6c567ca999fd5246c]
+            example: ["63006c52be20c9b6aabf61e2","63006ae8be20c9b6aabf61d2"] 
+        quizIds:
+          type: array
+          items:
+            type: string
+            example: ["63126d798d8758652402eb3b"] 
+        videoIds:
+          type: array
+          items:
+            type: string
+            example: ["63007117be20c9b6aabf61fe","63007169be20c9b6aabf6200"] 
+        courseResourcesIds:
+          type: array
+          items:
+            type: string
+            example: ["62cb33638c39c0024dfd5e9a"]
+        elibraryResourcesIds:
+          type: array
+          items:
+            type: string
+            example: ["62cb33638c39c0024dfd5e9a"] 
 
     qwithans:
       type: object
@@ -1832,6 +1873,9 @@ components:
         prof:
           type: string
           example: second
+        title:
+          type: string
+          example: Model Test 1
         instruction:
           type: array
           items:
@@ -2166,6 +2210,9 @@ components:
         prof:
           type: string
           example: second
+        title:
+          type: string
+          example: Model Test 1
         instruction:
           type: array
           items:
@@ -2809,19 +2856,6 @@ components:
           items:
            $ref: '#/components/schemas/buysubscriptionpackage2'
 
-    infosss:
-      type: object
-      properties:
-        topicName:
-          type: string
-          example: Gross Anatomy
-        topicOverview:
-          type: string
-          example: Gross Anatomy overview
-        courses:
-          type: array
-          items:
-           $ref: '#/components/schemas/courses2'
     
     subscriptionsss:
       type: object
@@ -2848,6 +2882,19 @@ components:
         name:
           type: string
           example: Thorax
+        preview:
+          type: string
+          example: image link
+
+    courses3:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 000001
+        name:
+          type: string
+          example: Vector
         preview:
           type: string
           example: image link
@@ -2925,9 +2972,36 @@ components:
           example: Anatomy
         sectionDesc:
           type: string
-          example: optional desc
-        topics:
-          $ref: '#/components/schemas/infosss'
+          example: This is anatomy
+        topicName:
+          type: string
+          example: Gross Anatomy
+        topicOverview:
+          type: string
+          example: Gross Anatomy Overview
+        courses:
+          $ref: '#/components/schemas/courses2'
+
+    admissionss:
+      type: object
+      properties:
+        subject:
+          type: string
+          example: physics
+        sectionName:
+          type: string
+          example: First paper
+        sectionDesc:
+          type: string
+          example: This is first paper
+        topicName:
+          type: string
+          example: NA
+        topicOverview:
+          type: string
+          example: NA
+        courses:
+          $ref: '#/components/schemas/courses3'
 
     profiless:
       type: object
@@ -3519,8 +3593,20 @@ components:
     getprofinfo1:
       type: object
       properties:
-        info:
-         $ref: '#/components/schemas/infoss'
+        data:
+          type: array
+          items:
+            type: object
+            $ref: '#/components/schemas/infoss'
+
+    getadmissioninfo1:
+      type: object
+      properties:
+        data:
+         type: array
+         items:
+            type: object
+            $ref: '#/components/schemas/admissionss'
 
     getmentordetails1:
       type: object
@@ -4390,6 +4476,7 @@ components:
       type: object
       required:
         - prof
+        - title
         - instruction
         - description
         - quizId
@@ -4402,6 +4489,9 @@ components:
             - second
             - third
             - final
+        title: 
+          type: string
+          example: Model Test 1
         instruction:
           type: array
           items:
@@ -4482,6 +4572,8 @@ components:
       required:
         - title
         - slug
+        - subscriptionsType
+        - packageCardTextList
         - packageIncludes
         - intervalType
         - status
@@ -4491,13 +4583,21 @@ components:
       properties:
         title:
           type: string
-          example: Admission model test
+          example: Course test example
         slug:
           type: string
           example: medi4
         subscriptionsType:
           type: string
-          example: mbbs-monthly
+          enum:
+            - mbbs-monthly
+            - post-grad-monthly
+            - admission-one-time
+        packageCardTextList:
+          type: array
+          items:
+            type: string
+            example: ["All mbbs course","All mbbs quiz", "All resources"]
         packageIncludes:
           $ref: '#/components/schemas/addsubscriptionpackage2' 
         description:
@@ -5393,7 +5493,7 @@ components:
           example: 200
         message:
           type: string
-          example: Home page item viewed succesfully
+          example: Prof course item viewed succesfully
         developerMessage:
           type: string
           example:
@@ -5401,11 +5501,32 @@ components:
           type: boolean
           example: false
         data:
-          type: array
-          items:
-            type: string
-            example: 
-            $ref: '#/components/schemas/getprofinfo1' 
+          type: object
+          $ref: '#/components/schemas/getprofinfo1' 
+         
+           
+
+    getadmissioninfo:
+      type: object
+      properties:
+        isSuccess:
+          type: boolean
+          example: true
+        statusCode:
+          type: integer
+          example: 200
+        message:
+          type: string
+          example: Admission course item viewed succesfully
+        developerMessage:
+          type: string
+          example:
+        isReadOnly:
+          type: boolean
+          example: false
+        data:
+          type: object       
+          $ref: '#/components/schemas/getadmissioninfo1'
 
     getmentordetails:
       type: object
