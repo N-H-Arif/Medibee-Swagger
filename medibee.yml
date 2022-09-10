@@ -1965,15 +1965,12 @@ components:
         image:
           type: string
           example: https://images.indianexpress.com/2020/06/online-classes.jpg
-        intervalType:
-          type: string
-          example: one-time
         description:
           type: string
           example: This is description for model test
         instruction:
           type: string
-          example: Follow all the rules
+          example: ["Follow all the rules","Try to follow the advice of instructor" ]
         slug:
           type: string
           example: model01
@@ -1982,9 +1979,6 @@ components:
           items:
             type: string
             example: [model2, ssc]  
-        category:
-          type: string
-          example: ssc
         totalQuestion:
           type: integer
           example: 10
@@ -1997,15 +1991,6 @@ components:
         totalTimeInMinutes:
           type: integer
           example: 10
-        startTime:
-          type: string
-          example: 2020-05-15T00:00:00.000Z
-        endTime:
-          type: string
-          example: 2024-05-15T00:00:00.000Z
-        answerPublishTime:
-          type: string
-          example: 2021-05-15T00:00:00.000Z
         _id:
           type: string
           example: 627b99311a48fb2b131b221d
@@ -4237,10 +4222,8 @@ components:
         - title
         - type
         - status
-        - intervalType
         - instruction
         - slug
-        - category
         - totalQuestion
         - totalMarks
         - negativeMarksPercentage
@@ -4264,16 +4247,14 @@ components:
         image:
           type: string
           example: https://images.indianexpress.com/2020/06/online-classes.jpg
-        intervalType:
-          type: string
-          enum:
-            - one-time
         description:
           type: string
           example: This is description for model test
         instruction:
-          type: string
-          example: Follow all the rules
+          type: array
+          items:
+            type: string
+            example: ['Follow all the rules', 'Try to follow the advice of instructor']
         slug:
           type: string
           example: model01
@@ -4282,13 +4263,6 @@ components:
           items:
             type: string
             example: [model2, ssc]  
-        category:
-          type: string
-          enum:
-            - ssc
-            - hsc
-            - medical-admission
-            - mbbs-1
         totalQuestion:
           type: number
           example: 10
@@ -4301,18 +4275,7 @@ components:
         totalTimeInMinutes:
           type: number
           example: 10
-        startTime:
-          type: string
-          format: date
-          example: 2020-05-15
-        endTime:
-          type: string
-          format: date
-          example: 2024-05-15
-        answerPublishTime:
-          type: string
-          format: date
-          example: "2021-05-15"
+       
 
     getimage:
       type: object
